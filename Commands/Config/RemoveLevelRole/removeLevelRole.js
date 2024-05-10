@@ -6,6 +6,9 @@ import func from './_removeLevelRole.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('remove-level-role')
+    .setNameLocalizations({
+      ru: 'удалить-роль-уровня',
+    })
     .setDescription('Удалить уровневую роль.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addNumberOption((option) =>

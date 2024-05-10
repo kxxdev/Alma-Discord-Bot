@@ -6,6 +6,9 @@ import func from './_questStart.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('start')
+    .setNameLocalizations({
+      ru: 'старт',
+    })
     .setDescription('Восстановить или запустить квест.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
   async execute(interaction) {

@@ -6,6 +6,9 @@ import func from './_profile.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('profile')
+    .setNameLocalizations({
+      ru: 'профиль',
+    })
     .setDescription('Карточка вашего профиля.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .addUserOption((option) =>

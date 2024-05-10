@@ -6,6 +6,9 @@ import func from './_unMute.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('unmute')
+    .setNameLocalizations({
+      ru: 'размутить',
+    })
     .setDescription('Снять заглушение с пользователя в таверне.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
     .addUserOption((option) =>

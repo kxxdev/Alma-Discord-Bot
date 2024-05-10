@@ -6,6 +6,9 @@ import func from './_pay.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('pay')
+    .setNameLocalizations({
+      ru: 'передать-эрис',
+    })
     .setDescription('Передать эрис пользователю.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .addUserOption((option) =>

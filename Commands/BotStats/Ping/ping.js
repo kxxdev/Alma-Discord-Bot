@@ -6,6 +6,9 @@ import func from './_ping.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('ping')
+    .setNameLocalizations({
+      ru: 'пинг',
+    })
     .setDescription('Просмотр моего тугодумия.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
   async execute(interaction) {

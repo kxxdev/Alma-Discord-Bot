@@ -6,6 +6,9 @@ import func from './_top.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('top')
+    .setNameLocalizations({
+      ru: 'топ',
+    })
     .setDescription('Топ пользователей.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
   async execute(interaction) {

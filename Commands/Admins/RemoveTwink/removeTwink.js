@@ -6,6 +6,9 @@ import func from './_removeTwink.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('remove-twink')
+    .setNameLocalizations({
+      ru: 'снять-твинк',
+    })
     .setDescription('Снять твинк пользователя')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addUserOption((option) =>

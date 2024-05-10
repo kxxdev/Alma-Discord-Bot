@@ -6,6 +6,9 @@ import func from './_signature.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('signature')
+    .setNameLocalizations({
+      ru: 'установить-подпись',
+    })
     .setDescription('Указать подпись.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption((option) =>

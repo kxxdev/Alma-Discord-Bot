@@ -6,6 +6,9 @@ import func from './_storeInventory.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('store-inventory')
+    .setNameLocalizations({
+      ru: 'инвентарь-магазина',
+    })
     .setDescription('Посмотреть свой инвентарь магазина')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
   async execute(interaction) {

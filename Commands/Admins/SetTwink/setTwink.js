@@ -6,6 +6,9 @@ import func from './_setTwink.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('set-twink')
+    .setNameLocalizations({
+      ru: 'назначить-твинком',
+    })
     .setDescription('Установить твинк пользователя')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addUserOption((option) =>

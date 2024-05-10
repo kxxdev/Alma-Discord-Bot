@@ -6,6 +6,9 @@ import func from './_kick.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('kick')
+    .setNameLocalizations({
+      ru: 'кикнуть',
+    })
     .setDescription('Выгнать пользователя с таверны.')
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
     .addUserOption((option) =>

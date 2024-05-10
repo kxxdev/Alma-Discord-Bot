@@ -6,6 +6,9 @@ import func from './_birthday.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('birthday')
+    .setNameLocalizations({
+      ru: 'указать-день-рождения',
+    })
     .setDescription('Указать день рождения.')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .addNumberOption((option) =>

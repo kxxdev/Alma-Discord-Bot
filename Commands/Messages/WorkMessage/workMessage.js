@@ -6,6 +6,9 @@ import func from './_workMessage.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('work-message')
+    .setNameLocalizations({
+      ru: 'сообщение-работы',
+    })
     .setDescription('Создать сообщение с работами.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption((option) =>

@@ -6,6 +6,9 @@ import func from './_report.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('report')
+    .setNameLocalizations({
+      ru: 'жалоба',
+    })
     .setDescription('Написать жалобу на пользователя.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption((option) =>

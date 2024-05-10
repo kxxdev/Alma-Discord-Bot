@@ -6,6 +6,9 @@ import func from './_rulesMessage.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('rules-message')
+    .setNameLocalizations({
+      ru: 'сообщение-правил',
+    })
     .setDescription('Вывод сообщения с правилами.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {

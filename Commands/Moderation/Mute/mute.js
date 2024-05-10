@@ -6,6 +6,9 @@ import func from './_mute.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('mute')
+    .setNameLocalizations({
+      ru: 'мут',
+    })
     .setDescription('Заглушить пользователя в таверне.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
     .addUserOption((option) =>

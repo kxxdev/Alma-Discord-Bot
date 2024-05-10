@@ -6,6 +6,9 @@ import func from './_unBan.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('unban')
+    .setNameLocalizations({
+      ru: 'разбанить',
+    })
     .setDescription('Разблокировать пользователя в таверне.')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addStringOption((option) =>

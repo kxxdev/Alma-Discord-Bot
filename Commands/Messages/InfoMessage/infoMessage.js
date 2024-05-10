@@ -6,6 +6,9 @@ import func from './_infoMessage.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('info-message')
+    .setNameLocalizations({
+      ru: 'сообщение-информации',
+    })
     .setDescription('Создание сообщения с информацией.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {

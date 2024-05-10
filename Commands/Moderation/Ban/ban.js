@@ -6,6 +6,9 @@ import func from './_ban.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('ban')
+    .setNameLocalizations({
+      ru: 'бан',
+    })
     .setDescription('Заблокировать пользователя в таверне.')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addUserOption((option) =>

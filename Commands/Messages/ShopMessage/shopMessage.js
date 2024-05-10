@@ -6,6 +6,9 @@ import func from './_shopMessage.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('shop-message')
+    .setNameLocalizations({
+      ru: 'сообщение-магазина',
+    })
     .setDescription('Создать сообщение с магазином.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
