@@ -23,7 +23,7 @@ const command = async (interaction) => {
   // Создаем селект меню.
   const row = new ActionRowBuilder().addComponents(
     new StringSelectMenuBuilder()
-      .setCustomId(`shopinventory-${user.id}`)
+      .setCustomId(`storeInventory-${user.id}`)
       .setPlaceholder('Витрина..')
       .addOptions(
         {

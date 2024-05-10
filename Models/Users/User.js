@@ -451,7 +451,7 @@ export default class User {
   async removeProfileRoles({ member }) {
     try {
       this.inventory.shop.profileCards.cards.forEach(async (card) => {
-        const profileCard = shopConfig.profileCards[card.name];
+        const profileCard = shopConfig.backgrounds[card.name];
 
         if (member.roles.cache.has(profileCard.roleId)) {
           await member.roles.remove(profileCard.roleId).catch();

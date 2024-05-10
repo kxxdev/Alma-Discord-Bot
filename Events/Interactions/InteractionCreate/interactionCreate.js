@@ -1,7 +1,7 @@
 import User from '../../../Models/Users/User.js';
 
 import quests from '../../../Quests/quests.js';
-import inventoryStore from '../../EventsFunctions/UserStats/inventoryStoreMessage.js';
+import inventoryStore from './_inventoryStore.js';
 import infoMessage from './_infoMessage.js';
 import shopMessage from './_shopMessage.js';
 import workMessage from './_workMessage.js';
@@ -47,7 +47,7 @@ const event = {
 
       // Если это интеракция инвентаря магазина.
       else if (
-        interactionValues[0] === 'inventoryStore' &&
+        interactionValues[0] === 'storeInventory' &&
         user.id === interactionValues[1]
       ) {
         inventoryStore(interaction);

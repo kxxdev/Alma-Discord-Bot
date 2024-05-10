@@ -5,7 +5,7 @@ import func from './_storeInventory.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('shopinventory')
+    .setName('store-inventory')
     .setDescription('Посмотреть свой инвентарь магазина')
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
   async execute(interaction) {

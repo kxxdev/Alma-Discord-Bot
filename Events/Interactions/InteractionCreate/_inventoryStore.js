@@ -7,10 +7,10 @@ import {
 import User from '../../../Models/Users/User.js';
 import colors from '../../../Config/colors.json' assert { type: 'json' };
 
-const event = async (interaction) => {
+const inventoryStore = async (interaction) => {
   const { member, guild } = interaction;
 
-  if (interaction.customId != `shopinventory-${member.id}`)
+  if (interaction.customId != `storeInventory-${member.id}`)
     return await interaction
       .reply({
         content: 'Это не ваш инвентарь!',
@@ -84,4 +84,4 @@ const event = async (interaction) => {
     .catch((err) => console.log(err));
 };
 
-export default event;
+export default inventoryStore;
