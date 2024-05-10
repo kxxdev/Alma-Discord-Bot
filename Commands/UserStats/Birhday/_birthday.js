@@ -11,7 +11,7 @@ const command = async (interaction) => {
   const guildDb = await new Guild().get({ id: guild.id });
 
   // Загружаем экземпляр пользователя.
-  const userDb = await new User().get({ id: member.id, guildId: guild.id });
+  const userDb = await User.get({ id: member.id, guildId: guild.id });
 
   if (userDb.birthday?.day || userDb.birthday?.month) {
     const embed = new EmbedBuilder()

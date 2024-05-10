@@ -3,10 +3,8 @@ import UserService from './UserService.js';
 
 // Управление датой.
 import { isPast, addMinutes } from 'date-fns';
-import uniqid from 'uniqid';
 
 import config from '../../Config/config.json' assert { type: 'json' };
-import weapons from '../../Config/weapons.json' assert { type: 'json' };
 
 // Класс пользователя.
 export default class User {
@@ -27,7 +25,7 @@ export default class User {
   }
 
   // Получаем пользователя.
-  async get({ id, guildId }) {
+  static async get({ id, guildId }) {
     try {
       const userDb = await new UserService().get({ id, guildId });
 

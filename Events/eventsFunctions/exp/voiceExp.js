@@ -46,7 +46,7 @@ const event = async (client) => {
           (member) => member.id === memberChannel[0]
         );
         // Загружаем пользователя из БД.
-        const userDb = await new User().get({
+        const userDb = await User.get({
           id: member.id,
           guildId: channel.guild.id,
         });
@@ -68,7 +68,7 @@ const event = async (client) => {
         if (member.voice.selfMute) return;
 
         // Загружаем пользователя из БД.
-        const userDb = await new User().get({
+        const userDb = await User.get({
           id: member.id,
           guildId: channel.guild.id,
         });

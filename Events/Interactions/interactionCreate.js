@@ -1,8 +1,7 @@
 import User from '../../Models/Users/User.js';
-import config from '../../Config/config.json' assert { type: 'json' };
 
 import quests from '../../Quests/quests.js';
-import shopinventory from '../../Events/eventsFunctions/userStats/shopinventoryMessage.js';
+import shopinventory from '../eventsFunctions/userStats/shopinventoryMessage.js';
 
 const event = {
   name: 'interactionCreate',
@@ -10,7 +9,7 @@ const event = {
     const { user } = interaction;
 
     // Загружаем пользователя из БД.
-    const userDb = await new User().get({
+    const userDb = await User.get({
       id: user.id,
       guildId: client.tokens.GUILD_ID,
     });

@@ -5,7 +5,7 @@ const command = async (interaction) => {
   const { user } = interaction;
 
   // Загружаем экземпляр пользователя.
-  const userDb = await new User().get({
+  const userDb = await User.get({
     id: user?.id,
     guildId: interaction.client.tokens.GUILD_ID,
   });

@@ -5,7 +5,7 @@ import {
 } from 'discord.js';
 import User from '../../Models/Users/User.js';
 
-import shopConfig from '../../Config/shop-config.json' assert { type: "json" };
+import shopConfig from '../../Config/shop-config.json' assert { type: 'json' };
 import colors from '../../Config/colors.json' assert { type: 'json' };
 
 export default {
@@ -30,7 +30,7 @@ export default {
     const { guild, member } = interaction;
 
     // Загружаем экземпляр пользователя.
-    const userDb = await new User().get({ id: member.id, guildId: guild.id });
+    const userDb = await User.get({ id: member.id, guildId: guild.id });
 
     // Создаем необходимые перменные.
     const embedMain = new EmbedBuilder();
@@ -359,8 +359,7 @@ export default {
         // Выдаем ответ.
         await interaction.reply({
           ephemeral: true,
-          content:
-            'Поздравляем! У вас новая карточка профиля!',
+          content: 'Поздравляем! У вас новая карточка профиля!',
         });
       }
     }

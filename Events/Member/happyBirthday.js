@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../Models/Guilds/Guild.js';
-import User from'../../Models/Users/User.js';
+import User from '../../Models/Users/User.js';
 
 export default {
   name: 'ready',
@@ -22,12 +22,12 @@ export default {
         const guildDb = await new Guild().get({ id: guild.id });
 
         // Получаем всех пользователей.
-        const users = await new User().getAllInGuild({ guildId: guild.id });
+        const users = await User.getAllInGuild({ guildId: guild.id });
 
         // Проходимся по пользователям.
         users.forEach(async (user) => {
           // Получаем класс пользователя.
-          const userDb = await new User().get({ id: user.id, guildId: guild.id });
+          const userDb = await User.get({ id: user.id, guildId: guild.id });
 
           // Проверяем день рождения.
           if (

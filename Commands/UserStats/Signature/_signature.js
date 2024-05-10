@@ -6,7 +6,7 @@ import colors from '../../../Config/colors.json' assert { type: 'json' };
 const command = async (interaction) => {
   const { guild, member } = interaction;
   // Загружаем экземпляр пользователя.
-  const userDb = await new User().get({ id: member.id, guildId: guild.id });
+  const userDb = await User.get({ id: member.id, guildId: guild.id });
 
   // Загружаем данные из переменных.
   const signature = options.getString('текст');

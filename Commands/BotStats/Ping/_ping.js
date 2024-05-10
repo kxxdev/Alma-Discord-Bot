@@ -32,7 +32,7 @@ const command = async (interaction) => {
   const datenow = new Date();
 
   // Отправляем запрос в БД.
-  const users = await new User().get({ id: member.id, guildId: guild.id });
+  const users = await User.get({ id: member.id, guildId: guild.id });
 
   // Получаем дату после загрузки БД.
   const resultDate = new Date();

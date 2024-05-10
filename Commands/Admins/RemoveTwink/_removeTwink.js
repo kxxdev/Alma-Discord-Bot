@@ -12,7 +12,7 @@ const command = async (interaction) => {
   const reason = options.getString('причина') || 'Причина не указана.';
 
   // Создаем экземпляр класса пользователя.
-  const userDb = await new User().get({ id: user.id, guildId: guild.id });
+  const userDb = await User.get({ id: user.id, guildId: guild.id });
 
   // Устанавливаем стату твинка.
   await userDb.setTwink({ value: false, notice: reason });

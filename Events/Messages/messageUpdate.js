@@ -7,7 +7,7 @@ export default {
       return;
     }
     // Загружаем пользователя из БД.
-    const userDb = await new User().get({
+    const userDb = await User.get({
       id: newMessage.author.id,
       guildId: newMessage.client.tokens.GUILD_ID,
     });

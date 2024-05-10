@@ -24,7 +24,7 @@ const command = async (interaction) => {
   const ephemeral = channel.id != guildDb.channels.spam.id;
 
   // Загружаем БД автора команды.
-  const users = await new User().getAllInGuild({ guildId: guild.id });
+  const users = await User.getAllInGuild({ guildId: guild.id });
 
   const lenght = users.length > 10 ? 10 : users.length;
 

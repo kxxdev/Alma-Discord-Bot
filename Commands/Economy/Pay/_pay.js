@@ -26,7 +26,7 @@ const command = async (interaction) => {
   }
 
   // Загружаем БД автора команды.
-  const userDb = await new User().get({ id: member.id, guildId: guild.id });
+  const userDb = await User.get({ id: member.id, guildId: guild.id });
 
   // Загружаем БД гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -64,7 +64,7 @@ const command = async (interaction) => {
   }
 
   // Загружаем БД таргет мембера.
-  const targetDb = await new User().get({ id: user.id, guildId: guild.id });
+  const targetDb = await User.get({ id: user.id, guildId: guild.id });
 
   // Устанавливаем значения в БД.
   await userDb.subEris({ num });

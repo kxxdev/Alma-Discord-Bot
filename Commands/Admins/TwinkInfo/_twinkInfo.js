@@ -10,7 +10,7 @@ const command = async (interaction) => {
   const user = options.getUser('пользователь');
 
   // Получаем пользователя.
-  const userDb = await new User().get({ id: user.id, guildId: guild.id });
+  const userDb = await User.get({ id: user.id, guildId: guild.id });
 
   // Записываем статус пользователя.
   const twinkStatus = userDb.notice.twink.status

@@ -8,7 +8,7 @@ import {
 
 import User from '../Models/Users/User.js';
 import Guild from '../Models/Guilds/Guild.js';
-import config from '../Config/config.json' assert { type: "json" };
+import config from '../Config/config.json' assert { type: 'json' };
 
 const startQuest = async (interaction, userDb, questId, embed, components) => {
   await userDb.questStart({ id: questId });
@@ -55,7 +55,7 @@ const quest = async (interaction, values) => {
     let selected;
     const embed = new EmbedBuilder().setColor(0x2f3136);
     const components = [];
-    const userDb = await new User().get({
+    const userDb = await User.get({
       id: interaction.user.id,
       guildId: interaction.client.tokens.GUILD_ID,
     });

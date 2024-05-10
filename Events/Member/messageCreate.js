@@ -23,7 +23,7 @@ export default {
     const guildDb = await new Guild().get({ id: guild.id });
 
     // Загружаем пользователя из БД.
-    const userDb = await new User().get({ id: member.id, guildId: guild.id });
+    const userDb = await User.get({ id: member.id, guildId: guild.id });
 
     // Сброс временного голосового ограничения
     await userDb.nullTempVoiceStates();

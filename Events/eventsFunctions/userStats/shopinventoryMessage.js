@@ -24,7 +24,7 @@ const event = async (interaction) => {
   const embedMain = new EmbedBuilder();
   const row = new ActionRowBuilder();
 
-  const userDb = await new User().get({ id: member.id, guildId: guild.id });
+  const userDb = await User.get({ id: member.id, guildId: guild.id });
   const userShopInventory = await userDb.getShopInventory({ type: selected });
 
   if (selected === 'profile-backgrounds') {
@@ -42,9 +42,7 @@ const event = async (interaction) => {
         .setPlaceholder('Витрина..')
         .addOptions(userShopInventory)
     );
-  }
-
-  else if (selected === 'profile-frames') {
+  } else if (selected === 'profile-frames') {
     // Создаем эмбед с основным текстом.
     embedMain
       .setColor(Number(colors.default))
@@ -59,9 +57,7 @@ const event = async (interaction) => {
         .setPlaceholder('Витрина..')
         .addOptions(userShopInventory)
     );
-  }
-
-  else if (selected === 'profile-shadows') {
+  } else if (selected === 'profile-shadows') {
     // Создаем эмбед с основным текстом.
     embedMain
       .setColor(Number(colors.default))

@@ -26,7 +26,7 @@ const command = async (interaction) => {
   }
 
   // Загружаем экземпляр пользователя.
-  const userDb = await new User().get({ id: user.id, guildId: guild.id });
+  const userDb = await User.get({ id: user.id, guildId: guild.id });
 
   // Устанавливаем дату рождения.
   await userDb.setBirthday({ day, month });
