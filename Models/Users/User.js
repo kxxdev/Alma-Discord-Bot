@@ -4,7 +4,8 @@ import UserService from './UserService.js';
 // Управление датой.
 import { isPast, addMinutes } from 'date-fns';
 
-import config from '../../Config/config.json' assert { type: 'json' };
+import rolesConfig from '../../Config/roles-config.json' assert { type: 'json' };
+import shopConfig from '../../Config/shop-config.json' assert { type: 'json' };
 
 // Класс пользователя.
 export default class User {
@@ -280,21 +281,21 @@ export default class User {
 
       if (value === 'Фермер') {
         await member.roles
-          .add(config.roles.farmer)
+          .add(rolesConfig.farmer)
           .catch((err) => console.log(err));
       } else if (value === 'Пивовар') {
         await member.roles
-          .add(config.roles.brewer)
+          .add(rolesConfig.brewer)
           .catch((err) => console.log(err));
       } else if (value === 'Безработный') {
-        if (member.roles.cache.has(config.roles.farmer)) {
+        if (member.roles.cache.has(rolesConfig.farmer)) {
           await member.roles
-            .remove(config.roles.farmer)
+            .remove(rolesConfig.farmer)
             .catch((err) => console.log(err));
         }
-        if (member.roles.cache.has(config.roles.brewer)) {
+        if (member.roles.cache.has(rolesConfig.brewer)) {
           await member.roles
-            .remove(config.roles.brewer)
+            .remove(rolesConfig.brewer)
             .catch((err) => console.log(err));
         }
       }
@@ -450,7 +451,7 @@ export default class User {
   async removeProfileRoles({ member }) {
     try {
       this.inventory.shop.profileCards.cards.forEach(async (card) => {
-        const profileCard = config.profileCards[card.name];
+        const profileCard = shopConfig.profileCards[card.name];
 
         if (member.roles.cache.has(profileCard.roleId)) {
           await member.roles.remove(profileCard.roleId).catch();

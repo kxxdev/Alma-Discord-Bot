@@ -1,5 +1,4 @@
 import User from '../../../Models/Users/User.js';
-import config from '../../../Config/config.json' assert { type: 'json' };
 export default {
   name: 'messageReactionRemove',
   async execute(messageReaction, user) {

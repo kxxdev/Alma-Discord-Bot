@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits, Partials, Collection } from 'discord.js';
 import tokens from './Config/tokens.json' assert { type: 'json' };
-import config from './Config/config.json' assert { type: 'json' };
+import rolesConfig from './Config/roles-config.json' assert { type: 'json' };
+import shopConfig from './Config/shop-config.json' assert { type: 'json' };
 
 const {
   Guilds,
@@ -34,7 +35,8 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-client.config = config;
+client.rolesConfig = rolesConfig;
+client.shopConfig = shopConfig;
 if (process.env.NODE_ENV === 'production') {
   client.tokens = tokens.PRODUCTION;
 } else {
