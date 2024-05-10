@@ -3,6 +3,7 @@ import startFunctions from './_startFunctions.js';
 import mongooseConnect from './_mongooseConnect.js';
 import happyBirthday from './_happyBirthday.js';
 import mongoose from 'mongoose';
+import packageFile from '../../../package.json' assert { type: 'json' };
 const table = new ascii().setHeading('Name', 'Status');
 
 export default {
@@ -20,7 +21,10 @@ export default {
       table.addRow('happyBirthday', 'start');
 
       // Выводим информацию в консоль.
-      table.addRow(client.user.username, 'online');
+      table.addRow(
+        `${client.user.username} version ${packageFile.version}`,
+        'online'
+      );
       table.addRow('Mode', process.env.NODE_ENV);
       if (mongoose.connect) {
         table.addRow('MongoDB', 'connected');
