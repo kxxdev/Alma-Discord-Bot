@@ -2,7 +2,7 @@ import Guild from '../../../Models/Guilds/Guild.js';
 import User from '../../../Models/Users/User.js';
 import giveLevelRole from '../../../Functions/giveLevelRole.js';
 
-// Функция получения количества часов которое можно сидеть без проверки.
+// Функция получения количества часов которое можно сидеть без проверки
 const getVoiceAmount = () => {
   const dateNow = new Date();
   const hour = dateNow.getHours();
