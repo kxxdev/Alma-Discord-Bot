@@ -2,7 +2,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 
 import User from '../../../Models/Users/User.js';
 import Guild from '../../../Models/Guilds/Guild.js';
-import addExp from '../../../Functions/Levels.js';
+import addExp from '../../../Functions/levels.js';
 import autoThreads from '../../../Functions/autoThreads.js';
 
 export default {
