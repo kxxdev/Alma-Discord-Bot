@@ -16,7 +16,6 @@ const {
 const { User, Message, GuildMember, ThreadMember, Channel } = Partials;
 
 import { loadEvents } from './Handlers/eventHandler.js';
-//
 import { loadCommands } from './Handlers/commandsHanlder.js';
 
 const client = new Client({
