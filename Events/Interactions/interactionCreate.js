@@ -1,7 +1,7 @@
 import User from '../../Models/Users/User.js';
 
 import quests from '../../Quests/quests.js';
-import shopinventory from '../eventsFunctions/userStats/shopinventoryMessage.js';
+import inventoryStore from '../EventsFunctions/UserStats/inventoryStoreMessage.js';
 
 const event = {
   name: 'interactionCreate',
@@ -60,10 +60,10 @@ const event = {
       if (interactionValues[0] === 'quest') {
         quests(interaction, interactionValues);
       } else if (
-        interactionValues[0] === 'shopinventory' &&
+        interactionValues[0] === 'inventoryStore' &&
         user.id === interactionValues[1]
       ) {
-        shopinventory(interaction);
+        inventoryStore(interaction);
       }
     } catch (err) {
       console.log(err);
