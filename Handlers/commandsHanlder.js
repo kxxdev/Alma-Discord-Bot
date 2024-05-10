@@ -7,9 +7,6 @@ import fs from 'fs';
 // Создаем таблицу и устанавливаем ей заголовки.
 const table = new ascii().setHeading('Commands', 'Status');
 
-// Загружаем в folders все папки в папке Events.
-const folders = fs.readdirSync('./Commands');
-
 // Функция загрузки команд.
 const loadCommands = async (client) => {
   // Создаем массив комманд.
@@ -18,26 +15,35 @@ const loadCommands = async (client) => {
   // Записываем все папки в папке Commands.
   const commandsFolder = fs.readdirSync('./Commands');
 
-  // Проходимся по всем папкам.
-  for (const folder of commandsFolder) {
-    // Записываем все файлы команд в папке.
-    const commandsFiles = fs
-      .readdirSync(`./Commands/${folder}`)
-      .filter((file) => file.endsWith('.js'));
+  // Проходимся по всем папкам в папке Commands.
+  for (const commandCategoryFolder of commandsFolder) {
+    // Получаем папки категории команд.
+    const commandCategoryFolders = fs.readdirSync(
+      `./Commands/${commandCategoryFolder}`
+    );
+    // Проходимcя по папкам категории команд
+    for (const commandFolder of commandCategoryFolders) {
+      // Записываем все файлы команд в папке.
+      const commandsFiles = fs
+        .readdirSync(`./Commands/${commandCategoryFolder}/${commandFolder}`)
+        .filter((file) => file.endsWith('.js') && file.charAt(0) != '_');
 
-    // Проходимся по всем файлам команд.
-    for (const file of commandsFiles) {
-      // Получаем файл команды.
-      const commandFile = await import(`../Commands/${folder}/${file}`);
+      // Проходимся по всем файлам команд.
+      for (const file of commandsFiles) {
+        // Получаем файл команды.
+        const commandFile = await import(
+          `../Commands/${commandCategoryFolder}/${commandFolder}/${file}`
+        );
 
-      // Устанавливаем команду.
-      client.commands.set(commandFile.default.data.name, commandFile);
+        // Устанавливаем команду.
+        client.commands.set(commandFile.default.data.name, commandFile);
 
-      // Записываем команду в массив команд.
-      commandsArray.push(commandFile.default.data.toJSON());
+        // Записываем команду в массив команд.
+        commandsArray.push(commandFile.default.data.toJSON());
 
-      // Добавляем файл команды в таблицу.
-      table.addRow(file, 'loaded');
+        // Добавляем файл команды в таблицу.
+        table.addRow(file, 'loaded');
+      }
     }
   }
 
