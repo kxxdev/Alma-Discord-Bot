@@ -5,7 +5,7 @@ import func from './_twinkInfo.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('twinkinfo')
+    .setName('twink-info')
     .setDescription('Проверяем пользователя ни твинк.')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addUserOption((option) =>

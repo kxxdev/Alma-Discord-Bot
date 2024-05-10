@@ -5,7 +5,7 @@ import func from './_configRoles.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('configroles')
+    .setName('config-roles')
     .setDescription('Конфигурация ролей сервера.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addRoleOption((option) =>

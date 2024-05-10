@@ -5,7 +5,7 @@ import func from './_setBirthday.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('setbirthday')
+    .setName('set-birthday')
     .setDescription('Указать день рождения пользователю.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption((option) =>

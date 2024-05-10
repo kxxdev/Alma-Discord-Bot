@@ -5,7 +5,7 @@ import func from './_configChannels.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('configchannels')
+    .setName('config-channels')
     .setDescription('Конфигурация каналов сервера.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addChannelOption((option) =>

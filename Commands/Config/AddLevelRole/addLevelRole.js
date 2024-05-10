@@ -5,7 +5,7 @@ import func from './_addLevelRole.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('addlevelrole')
+    .setName('add-level-role')
     .setDescription('Добавить уровневую роль.')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addRoleOption((option) =>
