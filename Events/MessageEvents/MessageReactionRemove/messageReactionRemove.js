@@ -1,7 +1,7 @@
-import User from '../../Models/Users/User.js';
-import config from '../../Config/config.json' assert { type: 'json' };
+import User from '../../../Models/Users/User.js';
+import config from '../../../Config/config.json' assert { type: 'json' };
 export default {
-  name: 'messageReactionAdd',
+  name: 'messageReactionRemove',
   async execute(messageReaction, user) {
     // Загружаем пользователя из БД.
     const userDb = await User.get({

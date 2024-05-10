@@ -17,6 +17,11 @@ const loadCommands = async (client) => {
 
   // Проходимся по всем папкам в папке Commands.
   for (const commandCategoryFolder of commandsFolder) {
+    // Проверяем если это файл.
+    if (commandCategoryFolder.endsWith('.js')) {
+      continue;
+    }
+
     // Получаем папки категории команд.
     const commandCategoryFolders = fs.readdirSync(
       `./Commands/${commandCategoryFolder}`

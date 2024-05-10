@@ -1,5 +1,4 @@
-import User from '../../Models/Users/User.js';
-import config from '../../Config/config.json' assert { type: 'json' };
+import User from '../../../Models/Users/User.js';
 export default {
   name: 'messageUpdate',
   async execute(oldMessage, newMessage) {

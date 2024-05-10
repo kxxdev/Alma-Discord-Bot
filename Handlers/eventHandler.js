@@ -7,28 +7,43 @@ import fs from 'fs';
 // Создаем таблицу и устанавливаем ей заголовки.
 const table = new ascii().setHeading('Events', 'Status');
 
-// Загружаем в folders все папки в папке Events.
-const folders = fs.readdirSync('./Events');
+// Сохраняем все категории ивентов
+const eventsCategorysFolder = fs.readdirSync('./Events');
 
 // Функция загрузки ивентов.
 const loadEvents = async (client) => {
-  // Проходимся по всем папкам в папке folders.
-  for (const folder of folders) {
-    // Загружаем в переменную все файлы с расширением '.js'.
-    const files = fs
-      .readdirSync(`./Events/${folder}`)
-      .filter((file) => file.endsWith('.js'));
+  // Проходимся по всем категориям в папке ивентов.
+  for (const eventCategoryFolder of eventsCategorysFolder) {
+    // Если это папка функций ивентов то выходим.
+    if (eventCategoryFolder === 'EventsFunctions') {
+      continue;
+    }
 
-    // Проходимся по всем файлам.
-    for (const file of files) {
-      // Загружаем в переменную файл ивента.
-      const event = await import(`../Events/${folder}/${file}`);
+    // Сохраняем все папки ивентов из категории.
+    const eventsFolder = fs.readdirSync(`./Events/${eventCategoryFolder}`);
 
-      // Запускаем ивент.
-      client.on(event.default.name, (...args) => event.default.execute(...args, client));
+    // Проходимся по всем ивентам в категории
+    for (const eventFolder of eventsFolder) {
+      // Загружаем в переменную все файлы с расширением '.js'.
+      const files = fs
+        .readdirSync(`./Events/${eventCategoryFolder}/${eventFolder}`)
+        .filter((file) => file.endsWith('.js') && file.charAt(0) != '_');
 
-      // Добавляем ивент в таблицу.
-      table.addRow(file, 'loaded');
+      // Проходимся по всем файлам.
+      for (const file of files) {
+        // Загружаем в переменную файл ивента.
+        const event = await import(
+          `../Events/${eventCategoryFolder}/${eventFolder}/${file}`
+        );
+
+        // Запускаем ивент.
+        client.on(event.default.name, (...args) => {
+          event.default.execute(...args, client);
+        });
+
+        // Добавляем ивент в таблицу.
+        table.addRow(file, 'loaded');
+      }
     }
   }
   // Возвращаем таблицу загруженных ивентов в логи.
