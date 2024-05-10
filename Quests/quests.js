@@ -1,8 +1,8 @@
 import mainQuest from './mainQuest.js';
 
-const quests = (interaction, values) => {
+const quests = (interaction, info) => {
   try {
-    switch (values[1]) {
+    switch (info.id) {
       case 'Main':
         mainQuest(interaction, values);
         break;

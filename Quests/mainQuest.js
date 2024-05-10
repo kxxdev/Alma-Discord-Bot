@@ -8,7 +8,7 @@ import {
 
 import User from '../Models/Users/User.js';
 import Guild from '../Models/Guilds/Guild.js';
-import config from '../Config/config.json' assert { type: 'json' };
+import colors from '../Config/colors.json' assert { type: 'json' };
 
 const startQuest = async (interaction, userDb, questId, embed, components) => {
   await userDb.questStart({ id: questId });
@@ -43,9 +43,9 @@ const errorInteraction = async (interaction) => {
   });
 };
 
-const quest = async (interaction, values) => {
+const quest = async (interaction, info) => {
   try {
-    if (interaction.user.id != values[3]) return;
+    if (interaction.user.id != info.userId) return;
     const guild = await interaction?.client?.guilds?.cache.find(
       (guild) => guild.id === interaction.client.tokens.GUILD_ID
     );
@@ -53,7 +53,7 @@ const quest = async (interaction, values) => {
       (member) => member.id === interaction.user.id
     );
     let selected;
-    const embed = new EmbedBuilder().setColor(0x2f3136);
+    const embed = new EmbedBuilder().setColor(colors.default);
     const components = [];
     const userDb = await User.get({
       id: interaction.user.id,
@@ -63,12 +63,12 @@ const quest = async (interaction, values) => {
       id: interaction.client.tokens.GUILD_ID,
     });
 
-    const quest = await userDb.getQuest({ id: values[1] });
+    const quest = await userDb.getQuest({ id: info.id });
     if (quest) {
-      values[2] = quest.stage;
+      info.stage = quest.stage;
     }
 
-    switch (values[2]) {
+    switch (info.stage) {
       case 'start':
         // Устанавливаем описание эмбеда.
         embed.setTitle('Добро пожаловать!');
@@ -92,11 +92,11 @@ const quest = async (interaction, values) => {
         );
 
         // Запускаем квест.
-        await startQuest(interaction, userDb, values[2], embed, components);
+        await startQuest(interaction, userDb, info.stage, embed, components);
 
         // Апаем стадию
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage1',
         });
         break;
@@ -121,7 +121,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage2',
         });
 
@@ -150,7 +150,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage3',
         });
 
@@ -177,7 +177,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage4',
         });
 
@@ -204,7 +204,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage5',
         });
 
@@ -232,7 +232,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage6',
         });
 
@@ -299,7 +299,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage7',
         });
 
@@ -325,7 +325,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage5',
         });
 
@@ -355,10 +355,10 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage8',
         });
-        selected = interaction?.values[0];
+        selected = interaction?.info.type;
         switch (selected) {
           case 'human':
             await member.roles.add(guildDb.roles.human.id).catch();
@@ -406,7 +406,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage9',
         });
 
@@ -434,7 +434,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage10',
         });
 
@@ -462,7 +462,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage11',
         });
 
@@ -494,7 +494,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage12',
         });
 
@@ -525,7 +525,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage13',
         });
 
@@ -556,7 +556,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage14',
         });
 
@@ -584,7 +584,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage15',
         });
 
@@ -612,7 +612,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage16',
         });
 
@@ -643,7 +643,7 @@ const quest = async (interaction, values) => {
         );
 
         await userDb.setQuestStage({
-          id: values[1],
+          id: info.id,
           stage: 'stage17',
         });
 

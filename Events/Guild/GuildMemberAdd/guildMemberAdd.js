@@ -7,7 +7,13 @@ import quests from '../../../Quests/quests.js';
 export default {
   name: 'guildMemberAdd',
   async execute(member) {
-    const values = ['quest', 'Main', 'start', member.id];
+    // const values = ['quest', 'Main', 'start', member.id];
+    const info = {
+      type: 'quest',
+      id: 'Main',
+      stage: 'start',
+      userId: member.id,
+    };
     const interaction = {
       value: 'fake',
       member,
@@ -15,7 +21,7 @@ export default {
     };
 
     // Стартуем квест
-    quests(interaction, values);
+    quests(interaction, info);
 
     // Загружаем экземпяр класса гильдии и пользователя.
     const guildDb = await new Guild().get({ id: member.guild.id });
