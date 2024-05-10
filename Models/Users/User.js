@@ -394,7 +394,7 @@ export default class User {
     }
   }
 
-  // Проверка наличия карточки профиля.
+  // Проверка наличия фона аватара профиля
   async checkProfileShadows({ name }) {
     try {
       const profile = this.inventory.shop.profileShadows.shadows.find(
