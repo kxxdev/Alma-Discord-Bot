@@ -37,7 +37,7 @@ export default class User {
   }
 
   // Получение всех пользователей в гильдии.
-  async getAllInGuild({ guildId }) {
+  static async getAllInGuild({ guildId }) {
     try {
       const users = await new UserService().getAllInGuild({ guildId });
 
