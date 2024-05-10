@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
-import commandsError from '../../../CommandsFunctions/commandsError.js';
+import commandsError from '../../commandsError.js';
 import func from './_top.js';
 
 export default {
