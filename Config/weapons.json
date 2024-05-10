@@ -1,0 +1,12 @@
+{
+  "stone": {
+    "id": "stone",
+    "rareLevel": 1,
+    "name": "Камень, просто камень.",
+    "description": "Это самый обычный камень.",
+    "level": 1,
+    "type": "Обычное",
+    "damage": 1,
+    "price": 1
+  }
+}

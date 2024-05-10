@@ -1,0 +1,98 @@
+{
+  "backgrounds": {
+    "ProfileCard-NightDeer": {
+      "price": 10000,
+      "roleId": "1168950712290517143"
+    },
+    "ProfileCard-RingLight": {
+      "price": 10000,
+      "roleId": "1168951079698972743"
+    },
+    "ProfileCard-JapanRedMoon": {
+      "price": 10000,
+      "roleId": "1168951190390845440"
+    },
+    "ProfileCard-YourNameSky": {
+      "price": 20000,
+      "roleId": "1168951331575312384"
+    },
+    "ProfileCard-ScarletSunset": {
+      "price": 20000,
+      "roleId": "1168951419827654847"
+    },
+    "ProfileCard-RiverSpirit": {
+      "price": 20000,
+      "roleId": "1168951557799293001"
+    },
+    "ProfileCard-PinkCats": {
+      "price": 30000,
+      "roleId": "1168951685666836540"
+    },
+    "ProfileCard-Fullmoon": {
+      "price": 30000,
+      "roleId": "1168951789182259282"
+    },
+    "ProfileCard-Nightsea": {
+      "price": 30000,
+      "roleId": "1168951829053329591"
+    }
+  },
+  "frames": {
+    "ProfileCard-Standart": {
+      "price": 10000
+    },
+    "ProfileCard-White": {
+      "price": 10000
+    },
+    "ProfileCard-LightBlue": {
+      "price": 10000
+    },
+    "ProfileCard-Orange": {
+      "price": 10000
+    },
+    "ProfileCard-Green": {
+      "price": 10000
+    },
+    "ProfileCard-Red": {
+      "price": 10000
+    },
+    "ProfileCard-Pink": {
+      "price": 10000
+    },
+    "ProfileCard-Blue": {
+      "price": 10000
+    },
+    "ProfileCard-Black": {
+      "price": 10000
+    }
+  },
+  "shadows": {
+    "ProfileCard-Standart": {
+      "price": 10000
+    },
+    "ProfileCard-Blue": {
+      "price": 10000
+    },
+    "ProfileCard-Yellow": {
+      "price": 10000
+    },
+    "ProfileCard-Green": {
+      "price": 10000
+    },
+    "ProfileCard-Red": {
+      "price": 10000
+    },
+    "ProfileCard-Orange": {
+      "price": 10000
+    },
+    "ProfileCard-Pink": {
+      "price": 10000
+    },
+    "ProfileCard-Violet": {
+      "price": 10000
+    },
+    "ProfileCard-Black": {
+      "price": 10000
+    }
+  }
+}

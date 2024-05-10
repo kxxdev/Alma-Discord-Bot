@@ -1,0 +1,26 @@
+{
+  "name": "alma",
+  "version": "1.4.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./app.js",
+    "dev": "cross-env NODE_ENV=development nodemon ./app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.41",
+    "ascii-table": "^0.0.9",
+    "cross-env": "^7.0.3",
+    "date-fns": "^2.30.0",
+    "discord.js": "^14.15.2",
+    "dotenv": "^16.3.0",
+    "fs": "^0.0.1-security",
+    "mongoose": "^7.3.0",
+    "nodemon": "^2.0.22",
+    "uniqid": "^5.4.0"
+  }
+}

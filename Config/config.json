@@ -1,0 +1,62 @@
+{
+  "channels": {
+    "welcomeChannelId": "dm"
+  },
+  "hex": {
+    "default": "0x2f3136",
+    "success": "0xD8CBF8",
+    "error": "0xE76C86"
+  },
+  "roles": {
+    "farmer": "1168953271596101773",
+    "brewer": "1179878087157088276",
+    "admin": "920384487207084094"
+  },
+  "profileCards": {
+    "ProfileCard-NightDeer": {
+      "price": 10000,
+      "name": "Night Deer",
+      "roleId": "1168950712290517143"
+    },
+    "ProfileCard-RingLight": {
+      "price": 10000,
+      "name": "Ring Light",
+      "roleId": "1168951079698972743"
+    },
+    "ProfileCard-JapanRedMoon": {
+      "price": 10000,
+      "name": "Japan Red Moon",
+      "roleId": "1168951190390845440"
+    },
+    "ProfileCard-YourNameSky": {
+      "price": 20000,
+      "name": "Your name Sky",
+      "roleId": "1168951331575312384"
+    },
+    "ProfileCard-ScarletSunset": {
+      "price": 20000,
+      "name": "Scarlet Sunset",
+      "roleId": "1168951419827654847"
+    },
+    "ProfileCard-RiverSpirit": {
+      "price": 20000,
+      "name": "River Spirit",
+      "roleId": "1168951557799293001"
+    },
+    "ProfileCard-PinkCats": {
+      "price": 30000,
+      "name": "Pink Cats",
+      "roleId": "1168951685666836540"
+    },
+    "ProfileCard-Fullmoon": {
+      "price": 30000,
+      "name": "Full Moon",
+      "roleId": "1168951789182259282"
+    },
+    "ProfileCard-Nightsea": {
+      "price": 30000,
+      "name": "Night Sea",
+      "roleId": "1168951829053329591"
+    }
+  }
+}
