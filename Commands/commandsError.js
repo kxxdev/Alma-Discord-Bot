@@ -1,5 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
 import colors from '../Config/colors.json' assert { type: 'json' };
+import channelsConfig from '../Config/channels-config.json' assert { type: 'json' };
 
 const commandChannelDM = async (interaction) => {
   // Создаем эмбед-ответ.
@@ -7,7 +8,7 @@ const commandChannelDM = async (interaction) => {
     .setDescription(
       `**Эта команда не предназначена для моей лички 😓** 
       
-      Мои команды лучше писать тут — <#1071587442550919219>`
+      Мои команды лучше писать тут — <#${channelsConfig.spamChannelId}>`
     )
     .setColor(Number(colors.error))
     .setImage(colors.footerURL);
@@ -27,7 +28,7 @@ const commandError = async (interaction) => {
     .setDescription(
       `**Ой-ой! Кажется у меня в голове путаница..**
       
-      Что-то не могу выполнить команду, обратитесь за помощью в <#1071789322593894460>`
+      Что-то не могу выполнить команду, обратитесь за помощью в <#${channelsConfig.helpChannelId}>`
     )
     .setColor(Number(colors.error))
     .setImage(colors.footerURL);
