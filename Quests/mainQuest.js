@@ -36,40 +36,48 @@ const updateInteraction = async (interaction, embed, components) => {
     .catch((err) => console.log(err));
 };
 
-const errorInteraction = async (interaction) => {
-  await interaction.reply({
-    content: 'Неизвестная ошибка. Обратитесь к администрации. ',
-  });
-};
-
 const quest = async (interaction, info) => {
   // Получаем конфигурацию дизайна.
   const designConfig = interaction.client.designConfig;
 
   try {
+    // Проверка автора использования интеракции.
     if (interaction.user.id != info.userId) return;
+
+    // Получаем гильдию.
     const guild = await interaction?.client?.guilds?.cache.find(
       (guild) => guild.id === interaction.client.tokens.GUILD_ID
     );
+
+    // Получаем пользователя сервера.
     const member = await guild?.members?.cache.find(
       (member) => member.id === interaction.user.id
     );
-    let selected;
+
+    // Создаем эмбед.
     const embed = new EmbedBuilder().setColor(designConfig.default);
+
+    // Создаем массив для компонентов.
     const components = [];
+
+    // Получаем пользователя из БД.
     const userDb = await User.get({
       id: interaction.user.id,
       guildId: interaction.client.tokens.GUILD_ID,
     });
+
+    // Получаем гильдию из БД.
     const guildDb = await new Guild().get({
       id: interaction.client.tokens.GUILD_ID,
     });
 
+    // Получаем квест из БД.
     const quest = await userDb.getQuest({ id: info.id });
     if (quest) {
       info.stage = quest.stage;
     }
 
+    // Выполняем действия в зависимости от стадии квеста.
     switch (info.stage) {
       case 'start':
         // Устанавливаем описание эмбеда.
@@ -360,8 +368,7 @@ const quest = async (interaction, info) => {
           id: info.id,
           stage: 'stage8',
         });
-        selected = interaction?.info.type;
-        switch (selected) {
+        switch (interaction?.values[0]) {
           case 'human':
             await member.roles.add(guildDb.roles.human.id).catch();
             break;
