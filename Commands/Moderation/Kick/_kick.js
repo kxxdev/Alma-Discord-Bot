@@ -1,8 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { channel, options, member } = interaction;
 
   const user = options.getUser('пользователь');
@@ -29,8 +30,8 @@ const command = async (interaction) => {
       Причина: *${reason}*
       Тавернщик: <@${member.id}>`
     )
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

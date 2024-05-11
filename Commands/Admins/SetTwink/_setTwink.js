@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   // Получаем свойства и интеракции.
   const { options, guild } = interaction;
 
@@ -20,10 +22,10 @@ const command = async (interaction) => {
   // Создаем эмбед.
   const embed = new EmbedBuilder()
     .setDescription(
-      `Твинк статус у пользователя <@${user.id}> установлен ${colors.successEmoji}`
+      `Твинк статус у пользователя <@${user.id}> установлен ${designConfig.successEmoji}`
     )
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Устанавливаем стату твинка.
   await userDb.setTwink({ value: true, notice: reason });

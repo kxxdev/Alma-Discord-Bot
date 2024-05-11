@@ -1,107 +1,217 @@
 {
-  "backgrounds": {
-    "ProfileCard-NightDeer": {
-      "name": "Night Deer",
-      "price": 10000,
-      "roleId": "1168950712290517143"
+  "PRODUCTION": {
+    "backgrounds": {
+      "ProfileCard-NightDeer": {
+        "name": "Night Deer",
+        "price": 10000,
+        "roleId": "1168950712290517143"
+      },
+      "ProfileCard-RingLight": {
+        "name": "Ring Light",
+        "price": 10000,
+        "roleId": "1168951079698972743"
+      },
+      "ProfileCard-JapanRedMoon": {
+        "name": "Japan Red Moon",
+        "price": 10000,
+        "roleId": "1168951190390845440"
+      },
+      "ProfileCard-YourNameSky": {
+        "name": "Your name Sky",
+        "price": 20000,
+        "roleId": "1168951331575312384"
+      },
+      "ProfileCard-ScarletSunset": {
+        "name": "Scarlet Sunset",
+        "price": 20000,
+        "roleId": "1168951419827654847"
+      },
+      "ProfileCard-RiverSpirit": {
+        "name": "River Spirit",
+        "price": 20000,
+        "roleId": "1168951557799293001"
+      },
+      "ProfileCard-PinkCats": {
+        "name": "Pink Cats",
+        "price": 30000,
+        "roleId": "1168951685666836540"
+      },
+      "ProfileCard-Fullmoon": {
+        "name": "Full Moon",
+        "price": 30000,
+        "roleId": "1168951789182259282"
+      },
+      "ProfileCard-Nightsea": {
+        "name": "Night Sea",
+        "price": 30000,
+        "roleId": "1168951829053329591"
+      }
     },
-    "ProfileCard-RingLight": {
-      "name": "Ring Light",
-      "price": 10000,
-      "roleId": "1168951079698972743"
+    "frames": {
+      "ProfileCard-Standart": {
+        "price": 10000
+      },
+      "ProfileCard-White": {
+        "price": 10000
+      },
+      "ProfileCard-LightBlue": {
+        "price": 10000
+      },
+      "ProfileCard-Orange": {
+        "price": 10000
+      },
+      "ProfileCard-Green": {
+        "price": 10000
+      },
+      "ProfileCard-Red": {
+        "price": 10000
+      },
+      "ProfileCard-Pink": {
+        "price": 10000
+      },
+      "ProfileCard-Blue": {
+        "price": 10000
+      },
+      "ProfileCard-Black": {
+        "price": 10000
+      }
     },
-    "ProfileCard-JapanRedMoon": {
-      "name": "Japan Red Moon",
-      "price": 10000,
-      "roleId": "1168951190390845440"
-    },
-    "ProfileCard-YourNameSky": {
-      "name": "Your name Sky",
-      "price": 20000,
-      "roleId": "1168951331575312384"
-    },
-    "ProfileCard-ScarletSunset": {
-      "name": "Scarlet Sunset",
-      "price": 20000,
-      "roleId": "1168951419827654847"
-    },
-    "ProfileCard-RiverSpirit": {
-      "name": "River Spirit",
-      "price": 20000,
-      "roleId": "1168951557799293001"
-    },
-    "ProfileCard-PinkCats": {
-      "name": "Pink Cats",
-      "price": 30000,
-      "roleId": "1168951685666836540"
-    },
-    "ProfileCard-Fullmoon": {
-      "name": "Full Moon",
-      "price": 30000,
-      "roleId": "1168951789182259282"
-    },
-    "ProfileCard-Nightsea": {
-      "name": "Night Sea",
-      "price": 30000,
-      "roleId": "1168951829053329591"
+    "shadows": {
+      "ProfileCard-Standart": {
+        "price": 10000
+      },
+      "ProfileCard-Blue": {
+        "price": 10000
+      },
+      "ProfileCard-Yellow": {
+        "price": 10000
+      },
+      "ProfileCard-Green": {
+        "price": 10000
+      },
+      "ProfileCard-Red": {
+        "price": 10000
+      },
+      "ProfileCard-Orange": {
+        "price": 10000
+      },
+      "ProfileCard-Pink": {
+        "price": 10000
+      },
+      "ProfileCard-Violet": {
+        "price": 10000
+      },
+      "ProfileCard-Black": {
+        "price": 10000
+      }
     }
   },
-  "frames": {
-    "ProfileCard-Standart": {
-      "price": 10000
+
+  "DEVELOPMENT": {
+    "backgrounds": {
+      "ProfileCard-NightDeer": {
+        "name": "Night Deer",
+        "price": 10000,
+        "roleId": "1168950712290517143"
+      },
+      "ProfileCard-RingLight": {
+        "name": "Ring Light",
+        "price": 10000,
+        "roleId": "1168951079698972743"
+      },
+      "ProfileCard-JapanRedMoon": {
+        "name": "Japan Red Moon",
+        "price": 10000,
+        "roleId": "1168951190390845440"
+      },
+      "ProfileCard-YourNameSky": {
+        "name": "Your name Sky",
+        "price": 20000,
+        "roleId": "1168951331575312384"
+      },
+      "ProfileCard-ScarletSunset": {
+        "name": "Scarlet Sunset",
+        "price": 20000,
+        "roleId": "1168951419827654847"
+      },
+      "ProfileCard-RiverSpirit": {
+        "name": "River Spirit",
+        "price": 20000,
+        "roleId": "1168951557799293001"
+      },
+      "ProfileCard-PinkCats": {
+        "name": "Pink Cats",
+        "price": 30000,
+        "roleId": "1168951685666836540"
+      },
+      "ProfileCard-Fullmoon": {
+        "name": "Full Moon",
+        "price": 30000,
+        "roleId": "1168951789182259282"
+      },
+      "ProfileCard-Nightsea": {
+        "name": "Night Sea",
+        "price": 30000,
+        "roleId": "1168951829053329591"
+      }
     },
-    "ProfileCard-White": {
-      "price": 10000
+    "frames": {
+      "ProfileCard-Standart": {
+        "price": 10000
+      },
+      "ProfileCard-White": {
+        "price": 10000
+      },
+      "ProfileCard-LightBlue": {
+        "price": 10000
+      },
+      "ProfileCard-Orange": {
+        "price": 10000
+      },
+      "ProfileCard-Green": {
+        "price": 10000
+      },
+      "ProfileCard-Red": {
+        "price": 10000
+      },
+      "ProfileCard-Pink": {
+        "price": 10000
+      },
+      "ProfileCard-Blue": {
+        "price": 10000
+      },
+      "ProfileCard-Black": {
+        "price": 10000
+      }
     },
-    "ProfileCard-LightBlue": {
-      "price": 10000
-    },
-    "ProfileCard-Orange": {
-      "price": 10000
-    },
-    "ProfileCard-Green": {
-      "price": 10000
-    },
-    "ProfileCard-Red": {
-      "price": 10000
-    },
-    "ProfileCard-Pink": {
-      "price": 10000
-    },
-    "ProfileCard-Blue": {
-      "price": 10000
-    },
-    "ProfileCard-Black": {
-      "price": 10000
-    }
-  },
-  "shadows": {
-    "ProfileCard-Standart": {
-      "price": 10000
-    },
-    "ProfileCard-Blue": {
-      "price": 10000
-    },
-    "ProfileCard-Yellow": {
-      "price": 10000
-    },
-    "ProfileCard-Green": {
-      "price": 10000
-    },
-    "ProfileCard-Red": {
-      "price": 10000
-    },
-    "ProfileCard-Orange": {
-      "price": 10000
-    },
-    "ProfileCard-Pink": {
-      "price": 10000
-    },
-    "ProfileCard-Violet": {
-      "price": 10000
-    },
-    "ProfileCard-Black": {
-      "price": 10000
+    "shadows": {
+      "ProfileCard-Standart": {
+        "price": 10000
+      },
+      "ProfileCard-Blue": {
+        "price": 10000
+      },
+      "ProfileCard-Yellow": {
+        "price": 10000
+      },
+      "ProfileCard-Green": {
+        "price": 10000
+      },
+      "ProfileCard-Red": {
+        "price": 10000
+      },
+      "ProfileCard-Orange": {
+        "price": 10000
+      },
+      "ProfileCard-Pink": {
+        "price": 10000
+      },
+      "ProfileCard-Violet": {
+        "price": 10000
+      },
+      "ProfileCard-Black": {
+        "price": 10000
+      }
     }
   }
 }

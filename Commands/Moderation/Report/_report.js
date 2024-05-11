@@ -2,9 +2,10 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, member } = interaction;
   // Загружаем экземпляр гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -19,12 +20,12 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embedReport = new EmbedBuilder()
-    .setColor(Number(colors.error))
+    .setColor(Number(designConfig.error))
     .setTitle('Жалоба')
     .setDescription(
       `<@${member.id}> оставил(а) жалобу на пользователя <@${user.id}>: \`\`\`${reason}\`\`\``
     )
-    .setImage(colors.footerURL)
+    .setImage(designConfig.footerURL)
     .setThumbnail(user.displayAvatarURL());
 
   // Получаем канал уведомлений команды.
@@ -50,9 +51,9 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Ваша жалоба была отправлена ${colors.successEmoji}`)
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setDescription(`Ваша жалоба была отправлена ${designConfig.successEmoji}`)
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

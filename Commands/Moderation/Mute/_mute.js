@@ -1,9 +1,10 @@
 import { EmbedBuilder } from 'discord.js';
 import ms from 'ms';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, options, member } = interaction;
 
   const targetUser = options.getUser('пользователь');
@@ -13,8 +14,8 @@ const command = async (interaction) => {
   const reason = options.getString('причина') || 'Причина не указана.';
 
   const errEmbed = new EmbedBuilder()
-    .setColor(Number(colors.error))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.error))
+    .setImage(designConfig.footerURL);
 
   if (targetMember.roles.highest.position >= member.roles.highest.position) {
     errEmbed.setDescription(
@@ -39,8 +40,8 @@ const command = async (interaction) => {
       Причина: *${reason}*
       Тавернщик: <@${member.id}>`
     )
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

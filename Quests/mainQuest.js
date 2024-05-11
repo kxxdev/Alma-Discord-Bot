@@ -8,7 +8,6 @@ import {
 
 import User from '../Models/Users/User.js';
 import Guild from '../Models/Guilds/Guild.js';
-import colors from '../Config/colors.json' assert { type: 'json' };
 
 const startQuest = async (interaction, userDb, questId, embed, components) => {
   await userDb.questStart({ id: questId });
@@ -44,6 +43,9 @@ const errorInteraction = async (interaction) => {
 };
 
 const quest = async (interaction, info) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   try {
     if (interaction.user.id != info.userId) return;
     const guild = await interaction?.client?.guilds?.cache.find(
@@ -53,7 +55,7 @@ const quest = async (interaction, info) => {
       (member) => member.id === interaction.user.id
     );
     let selected;
-    const embed = new EmbedBuilder().setColor(colors.default);
+    const embed = new EmbedBuilder().setColor(designConfig.default);
     const components = [];
     const userDb = await User.get({
       id: interaction.user.id,

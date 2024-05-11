@@ -6,9 +6,11 @@ import {
 import User from '../../../Models/Users/User.js';
 
 import shopConfig from '../../../Config/shop-config.json' assert { type: 'json' };
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const shopMessage = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   // Записываем выбранное значение.
   const selected = interaction.values[0];
 
@@ -29,16 +31,16 @@ const shopMessage = async (interaction) => {
   ) {
     // Создаем эмбед с изображением.
     const embedImage = new EmbedBuilder()
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage(
         'https://media.discordapp.net/attachments/1005988738016497685/1168551220642861137/ProfileCards-Preview.png?ex=65522d21&is=653fb821&hm=1136031c299ac23162e11ffda75bd29509daf6f400c3c7f72dff2c51dc59cc16&='
       );
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Карточки профиля')
-      .setDescription(`${colors.gsEmoji} Что вы хотите купить?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите купить?`);
 
     // Создаем селект меню.
     row.addComponents(
@@ -120,16 +122,16 @@ const shopMessage = async (interaction) => {
   ) {
     // Создаем эмбед с изображением.
     const embedImage = new EmbedBuilder()
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage(
         'https://media.discordapp.net/attachments/1005988738016497685/1174386909519286354/ProfileFrames-Preview-Page-1.png?ex=6567680a&is=6554f30a&hm=2db93b30f001e756d0d880f7ded0612bce6905fa211aaaa5b6465aa510589cdc&='
       );
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Рамки профиля')
-      .setDescription(`${colors.gsEmoji} Что вы хотите купить?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите купить?`);
 
     // Создаем селект меню.
     row.addComponents(
@@ -211,16 +213,16 @@ const shopMessage = async (interaction) => {
   ) {
     // Создаем эмбед с изображением.
     const embedImage = new EmbedBuilder()
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage(
         'https://media.discordapp.net/attachments/1005988738016497685/1174386909183750306/ProfileShadows-Preview-Page-1.png?ex=6567680a&is=6554f30a&hm=516852a17f4a7a2f123a245b224c846e19f48171b8aa16e1b016e53085d8fc08&='
       );
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Рамки аватара')
-      .setDescription(`${colors.gsEmoji} Что вы хотите купить?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите купить?`);
 
     // Создаем селект меню.
     row.addComponents(

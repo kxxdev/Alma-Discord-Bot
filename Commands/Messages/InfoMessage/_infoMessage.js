@@ -4,27 +4,28 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { client, channel, guild } = interaction;
   // Создаем эмбед с изображением.
   const embedImage = new EmbedBuilder()
-    .setColor(Number(colors.default))
+    .setColor(Number(designConfig.default))
     .setImage(
       'https://media.discordapp.net/attachments/836998525329473576/1172880224925515786/4.png?ex=6561ecd4&is=654f77d4&hm=280370aa140aabde24791831b08db94d87e9e7befb2db03d73ef26c14005ad8f&='
     );
 
   // Создаем эмбед с основным текстом.
   const embedMain = new EmbedBuilder()
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL)
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL)
     .setTitle('A X E L')
-    .setDescription(`${colors.gsEmoji} *« Погрузитесь в аниме мир разнообразнейших приключений и квестов с нашей очаровательной богиней Альмой! »* 
+    .setDescription(`${designConfig.gsEmoji} *« Погрузитесь в аниме мир разнообразнейших приключений и квестов с нашей очаровательной богиней Альмой! »* 
 
-${colors.psEmoji} Данное место станет для тебя твоим уютным уголком в аниме мире. Оно славится своим бурным разнообразием и пестрыми красками.
+${designConfig.psEmoji} Данное место станет для тебя твоим уютным уголком в аниме мире. Оно славится своим бурным разнообразием и пестрыми красками.
             
-${colors.gsEmoji} Тут вы сможете найти новых друзей и приятные знакомства, компанию для просмотра и обсуждении любимых аниме, персонажей. Хоть и атмосфера здесь приятная, вам нужно быть осторожными. Никто не знает что вас будет ожидать в очередном приключении…`);
+${designConfig.gsEmoji} Тут вы сможете найти новых друзей и приятные знакомства, компанию для просмотра и обсуждении любимых аниме, персонажей. Хоть и атмосфера здесь приятная, вам нужно быть осторожными. Никто не знает что вас будет ожидать в очередном приключении…`);
 
   // Создаем селект меню.
   const row = new ActionRowBuilder().addComponents(
@@ -57,9 +58,9 @@ ${colors.gsEmoji} Тут вы сможете найти новых друзей 
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Сообщение отправлено ${colors.successEmoji}`)
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setDescription(`Сообщение отправлено ${designConfig.successEmoji}`)
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

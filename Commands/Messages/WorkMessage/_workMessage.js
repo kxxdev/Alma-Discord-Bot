@@ -4,15 +4,13 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
-const workValues = (workName) => {
+const workValues = (workName, designConfig) => {
   switch (workName) {
     case 'Фермер':
       return {
         embedImageUrl:
           'https://media.discordapp.net/attachments/836998525329473576/1179962717075943555/db1b6c7f4d32a880.png?ex=657bb0ea&is=65693bea&hm=5e4fa57975e43aff89a30b4e400061f043f25c1fd23435f400f4760179c522b4&=&format=webp&quality=lossless',
-        mainImageUrl: colors.footerURL,
+        mainImageUrl: designConfig.footerURL,
         title: 'Работа на ферме',
         description: 'Что вы хотите собрать?',
         selectMenu: new StringSelectMenuBuilder()
@@ -43,7 +41,7 @@ const workValues = (workName) => {
       return {
         embedImageUrl:
           'https://media.discordapp.net/attachments/836998525329473576/1179964759886544926/FarmWork_7.png?ex=657bb2d1&is=65693dd1&hm=4ed946c67545bbef0c69f9f71b9b2b05af3aa56077171ff504be64efdab76472&=&format=webp&quality=lossless',
-        mainImageUrl: colors.footerURL,
+        mainImageUrl: designConfig.footerURL,
         title: 'Работа на пивоварне',
         description: 'Что вы хотите сварить?',
         selectMenu: new StringSelectMenuBuilder()
@@ -74,19 +72,22 @@ const workValues = (workName) => {
 };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { channel } = interaction;
 
   const workName = interaction.options.getString('работа');
-  const work = workValues(workName);
+  const work = workValues(workName, designConfig);
 
   // Создаем эмбед с изображением.
   const embedImage = new EmbedBuilder()
-    .setColor(Number(colors.default))
+    .setColor(Number(designConfig.default))
     .setImage(work.embedImageUrl);
 
   // Создаем эмбед с основным текстом.
   const embedMain = new EmbedBuilder()
-    .setColor(Number(colors.default))
+    .setColor(Number(designConfig.default))
     .setImage(work.mainImageUrl)
     .setTitle(work.title)
     .setDescription(work.description);
@@ -101,9 +102,9 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Сообщение отправлено ${colors.successEmoji}`)
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setDescription(`Сообщение отправлено ${designConfig.successEmoji}`)
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

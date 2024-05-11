@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   // Получаем свойства и интеракции.
   const { options, guild } = interaction;
 
@@ -20,10 +22,10 @@ const command = async (interaction) => {
   // Создаем эмбед.
   const embed = new EmbedBuilder()
     .setDescription(
-      `Твинк статус с пользователя <@${user.id}> снят ${colors.successEmoji}`
+      `Твинк статус с пользователя <@${user.id}> снят ${designConfig.successEmoji}`
     )
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Отвечаем на интеракцию.
   await interaction.reply({

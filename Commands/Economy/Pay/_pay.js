@@ -2,9 +2,11 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, member, options } = interaction;
 
   // Загружаем данные из переменных.
@@ -17,8 +19,8 @@ const command = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setDescription(`Вы не можете передавать эрис самому себе`)
-            .setColor(Number(colors.error))
-            .setImage(colors.footerURL),
+            .setColor(Number(designConfig.error))
+            .setImage(designConfig.footerURL),
         ],
         ephemeral: true,
       })
@@ -40,8 +42,8 @@ const command = async (interaction) => {
             .setDescription(
               `Ваш аккаунт подозревается в мультиаккаунтинге. Напишите администрации для решения проблемы в <#${guildDb.channels.feedback.id}>`
             )
-            .setColor(Number(colors.error))
-            .setImage(colors.footerURL),
+            .setColor(Number(designConfig.error))
+            .setImage(designConfig.footerURL),
         ],
         ephemeral: true,
       })
@@ -55,8 +57,8 @@ const command = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setDescription(`Неверно указано количество.`)
-            .setColor(Number(colors.error))
-            .setImage(colors.footerURL),
+            .setColor(Number(designConfig.error))
+            .setImage(designConfig.footerURL),
         ],
         ephemeral: true,
       })
@@ -75,8 +77,8 @@ const command = async (interaction) => {
     .setDescription(
       `<@${member.id}> передал(а) \`${num}\` <:eris:1169666720852615228>  <@${user.id}>.`
     )
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

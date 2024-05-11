@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, member } = interaction;
   // Загружаем экземпляр пользователя.
   const userDb = await User.get({ id: member.id, guildId: guild.id });
@@ -28,9 +30,9 @@ const command = async (interaction) => {
     .setDescription(
       `Теперь ваша подпись будет указываться в вашем профиле. Для смены напишите команду еще раз.`
     )
-    .setColor(Number(colors.success))
+    .setColor(Number(designConfig.success))
     .setThumbnail(member.displayAvatarURL())
-    .setImage(colors.footerURL);
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

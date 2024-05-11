@@ -4,15 +4,16 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { channel } = interaction;
   await channel.send({
     embeds: [
       new EmbedBuilder()
         .setTitle('📕 Правила города')
-        .setColor(Number(colors.default))
+        .setColor(Number(designConfig.default))
         .setDescription(
           `
 1.  Общие положения
@@ -47,14 +48,14 @@ const command = async (interaction) => {
 •  Запрещена передача аккаунта третьим лицам.
             `
         )
-        .setImage(colors.footerGifURL),
+        .setImage(designConfig.footerGifURL),
     ],
   });
 
   await channel.send({
     embeds: [
       new EmbedBuilder()
-        .setColor(Number(colors.default))
+        .setColor(Number(designConfig.default))
         .setDescription(
           `
 5.  Правила по применению каналов и подканалов
@@ -75,15 +76,15 @@ const command = async (interaction) => {
 •  Булинг - задира́ние, тра́вля, агрессивное преследование пользователя со стороны остальных членов сервера или его части.
             `
         )
-        .setImage(colors.footerGifURL),
+        .setImage(designConfig.footerGifURL),
     ],
   });
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Сообщения отправлены ${colors.successEmoji}`)
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setDescription(`Сообщения отправлены ${designConfig.successEmoji}`)
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

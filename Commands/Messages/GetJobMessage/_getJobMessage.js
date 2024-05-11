@@ -4,23 +4,24 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { channel } = interaction;
   // Создаем эмбед с изображением.
   const embedImage = new EmbedBuilder()
-    .setColor(Number(colors.default))
+    .setColor(Number(designConfig.default))
     .setImage(
       'https://media.discordapp.net/attachments/836998525329473576/1179962734293549067/db6a7b9e5eb035c7.png?ex=6584eb6e&is=6572766e&hm=eeb89ff6704a91bea9325236c6d370e35c56f59d759f43f622bd40afd4b04aa6&=&format=webp&quality=lossless&width=810&height=386'
     );
 
   // Создаем эмбед с основным текстом.
   const embedMain = new EmbedBuilder()
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL)
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL)
     .setTitle('Трудоустройство')
-    .setDescription(`${colors.gsEmoji} Выберите подходящую вам работу`);
+    .setDescription(`${designConfig.gsEmoji} Выберите подходящую вам работу`);
 
   // Создаем селект меню.
   const row = new ActionRowBuilder().addComponents(
@@ -56,9 +57,9 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Сообщение отправлено ${colors.successEmoji}`)
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setDescription(`Сообщение отправлено ${designConfig.successEmoji}`)
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, options } = interaction;
 
   // Получение переменных из команды.
@@ -18,8 +20,8 @@ const command = async (interaction) => {
             .setDescription(
               'При добавлении роли необходимо указать оба пункта. Для просмотра текущих ролей не нужно указывать ничего.'
             )
-            .setColor(Number(colors.error))
-            .setImage(colors.footerURL),
+            .setColor(Number(designConfig.error))
+            .setImage(designConfig.footerURL),
         ],
       })
       .catch((err) => console.log(err));
@@ -45,8 +47,8 @@ const command = async (interaction) => {
         new EmbedBuilder()
           .setTitle('Текущие уровневые роли')
           .setDescription(`${roleLevels.join('\n')}`)
-          .setColor(Number(colors.default))
-          .setImage(colors.footerURL),
+          .setColor(Number(designConfig.default))
+          .setImage(designConfig.footerURL),
       ],
     })
     .catch((err) => console.log(err));

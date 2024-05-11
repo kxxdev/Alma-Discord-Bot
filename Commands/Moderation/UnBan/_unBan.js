@@ -1,8 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { options, member, guild } = interaction;
 
   const userId = options.getString('id-пользователя');
@@ -18,8 +19,8 @@ const command = async (interaction) => {
   Причина: *${reason}*
   Тавернщик: <@${member.id}>`
       )
-      .setColor(Number(colors.success))
-      .setImage(colors.footerURL);
+      .setColor(Number(designConfig.success))
+      .setImage(designConfig.footerURL);
 
     // Возвращаем ответ.
     await interaction
@@ -28,8 +29,8 @@ const command = async (interaction) => {
   } catch (err) {
     const errEmbed = new EmbedBuilder()
       .setDescription(`Пользователь с таким ID не заблокирован.`)
-      .setColor(Number(colors.error))
-      .setImage(colors.footerURL);
+      .setColor(Number(designConfig.error))
+      .setImage(designConfig.footerURL);
 
     // Возвращаем ответ.
     await interaction.reply({

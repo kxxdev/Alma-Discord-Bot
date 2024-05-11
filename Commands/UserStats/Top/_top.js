@@ -2,7 +2,6 @@ import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
 import Guild from '../../../Models/Guilds/Guild.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const expMn = (level, exp) => {
   let a = 0;
@@ -16,6 +15,9 @@ const expMn = (level, exp) => {
 };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild, channel } = interaction;
   // Загружаем экземпляр класса гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -111,7 +113,7 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setColor(Number(colors.default))
+    .setColor(Number(designConfig.default))
     .setTitle('✨ Топ путешественников ✨')
     .setThumbnail(
       'https://media.discordapp.net/attachments/836998525329473576/1075634728918585394/AnyConv.com__3F3F3F3F3F3F3F3F3F3F3F53.png'
@@ -123,7 +125,7 @@ ${topLevel.join('\n')}
 **Эрис:**
 ${toperis.join('\n')}`
     )
-    .setImage(colors.footerGifURL);
+    .setImage(designConfig.footerGifURL);
 
   // Возвращаем ответ.
   await interaction

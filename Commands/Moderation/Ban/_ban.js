@@ -1,8 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { options, member } = interaction;
 
   const user = options.getUser('пользователь');
@@ -14,8 +15,8 @@ const command = async (interaction) => {
     .setDescription(
       `Вы не можете заблокировать <@${user.id}> так как у него есть высшая роль.`
     )
-    .setColor(Number(colors.error))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.error))
+    .setImage(designConfig.footerURL);
 
   if (targetMember.roles.highest.position >= member.roles.highest.position) {
     return interaction.reply({ embeds: [errEmbed], ephemeral: true });
@@ -30,8 +31,8 @@ const command = async (interaction) => {
       Причина: *${reason}*
       Тавернщик: <@${member.id}>`
     )
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

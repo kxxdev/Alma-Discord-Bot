@@ -1,12 +1,14 @@
 import { EmbedBuilder } from 'discord.js';
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 import { addHours, isPast } from 'date-fns';
 
 import getTimeLeft from '../../../Functions/dateFunctions.js';
 
 const workMessage = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   // Записываем выбранное значение.
   const selected = interaction.values[0];
 
@@ -24,7 +26,7 @@ const workMessage = async (interaction) => {
         ephemeral: true,
         embeds: [
           new EmbedBuilder()
-            .setColor(Number(colors.error))
+            .setColor(Number(designConfig.error))
             .setDescription(
               `**Вы уже устроены на работу. Чтобы сменить ее вам нужно уволиться.**
           
@@ -53,7 +55,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Увольнение')
-              .setColor(Number(colors.success))
+              .setColor(Number(designConfig.success))
               .setDescription(
                 `
 Вы уволились с работы
@@ -73,7 +75,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Новая работа!')
-            .setColor(Number(colors.success))
+            .setColor(Number(designConfig.success))
             .setDescription(
               `
 Поздравляем, вы устроились на работу: **${selected}**
@@ -102,7 +104,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на ферме')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -126,7 +128,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на ферме')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -178,7 +180,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на ферме')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -213,7 +215,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Работа на ферме')
-            .setColor(Number(colors.success))
+            .setColor(Number(designConfig.success))
             .setFooter({
               text: footer,
             })
@@ -245,7 +247,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на пивоварне')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -269,7 +271,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на пивоварне')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -321,7 +323,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Работа на пивоварне')
-              .setColor(Number(colors.error))
+              .setColor(Number(designConfig.error))
               .setFooter({
                 text: footer,
               })
@@ -356,7 +358,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Работа на пивоварне')
-            .setColor(Number(colors.success))
+            .setColor(Number(designConfig.success))
             .setFooter({
               text: footer,
             })

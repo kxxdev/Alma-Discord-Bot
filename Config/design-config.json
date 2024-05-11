@@ -1,0 +1,23 @@
+{
+  "PRODUCTION": {
+    "footerURL": "https://i.imgur.com/EbcNZBA.png",
+    "footerGifURL": "https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif",
+    "successEmoji": "✅",
+    "gsEmoji": "<:green:1072353757007986750>",
+    "psEmoji": "<:pink:1072353875958444082>",
+    "default": "0x2f3136",
+    "success": "0xD8CBF8",
+    "error": "0xE76C86"
+  },
+
+  "DEVELOPMENT": {
+    "footerURL": "https://i.imgur.com/EbcNZBA.png",
+    "footerGifURL": "https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif",
+    "successEmoji": "✅",
+    "gsEmoji": "<:green:1072353757007986750>",
+    "psEmoji": "<:pink:1072353875958444082>",
+    "default": "0x2f3136",
+    "success": "0xD8CBF8",
+    "error": "0xE76C86"
+  }
+}

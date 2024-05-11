@@ -1,17 +1,18 @@
 import { EmbedBuilder } from 'discord.js';
-import colors from '../Config/colors.json' assert { type: 'json' };
-import channelsConfig from '../Config/channels-config.json' assert { type: 'json' };
 
 const commandChannelDM = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   // Создаем эмбед-ответ.
   const embed = new EmbedBuilder()
     .setDescription(
       `**Эта команда не предназначена для моей лички 😓** 
       
-      Мои команды лучше писать тут — <#${channelsConfig.spamChannelId}>`
+      Мои команды лучше писать тут — <#${interaction.client.channelsConfig.spamChannelId}>`
     )
-    .setColor(Number(colors.error))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.error))
+    .setImage(designConfig.footerURL);
 
   // Отвечаем на интеракцию
   await interaction
@@ -28,10 +29,10 @@ const commandError = async (interaction) => {
     .setDescription(
       `**Ой-ой! Кажется у меня в голове путаница..**
       
-      Что-то не могу выполнить команду, обратитесь за помощью в <#${channelsConfig.helpChannelId}>`
+      Что-то не могу выполнить команду, обратитесь за помощью в <#${interaction.client.channelsConfig.helpChannelId}>`
     )
-    .setColor(Number(colors.error))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.error))
+    .setImage(designConfig.footerURL);
 
   // Отвечаем на интеракцию
   await interaction

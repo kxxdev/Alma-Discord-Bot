@@ -4,9 +4,10 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { user, member } = interaction;
   // Создаем эмбед.
   const embed = new EmbedBuilder()
@@ -16,9 +17,9 @@ const command = async (interaction) => {
     Выберите, что вы хотите посмотреть
     `
     )
-    .setColor(Number(colors.success))
+    .setColor(Number(designConfig.success))
     .setThumbnail(member.displayAvatarURL())
-    .setImage(colors.footerURL);
+    .setImage(designConfig.footerURL);
 
   // Создаем селект меню.
   const row = new ActionRowBuilder().addComponents(

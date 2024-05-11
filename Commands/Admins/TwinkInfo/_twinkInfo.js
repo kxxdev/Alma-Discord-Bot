@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { options, guild } = interaction;
 
   // Получаем значение переменной.
@@ -24,8 +26,8 @@ const command = async (interaction) => {
         
         **Причина:** ${userDb.notice.twink.notice}`
     )
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL);
 
   // Отвечаем на интеракцию
   await interaction.reply({

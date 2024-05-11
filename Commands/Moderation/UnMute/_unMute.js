@@ -1,8 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
-import colors from '../../../Config/colors.json' assert { type: 'json' };
-
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { options, member, guild } = interaction;
 
   const targetUser = options.getUser('пользователь');
@@ -26,8 +27,8 @@ const command = async (interaction) => {
       .setDescription(
         `<@${userId}> выходит из угла.\nПричина: *${reason}*\nТавернщик: <@${member.id}>`
       )
-      .setColor(Number(colors.success))
-      .setImage(colors.footerURL);
+      .setColor(Number(designConfig.success))
+      .setImage(designConfig.footerURL);
 
     // Возвращаем ответ.
     await interaction
@@ -36,8 +37,8 @@ const command = async (interaction) => {
   } catch (err) {
     const errEmbed = new EmbedBuilder()
       .setDescription(`Не удалось снять заглушку с пользователя.`)
-      .setColor(Number(colors.error))
-      .setImage(colors.footerURL);
+      .setColor(Number(designConfig.error))
+      .setImage(designConfig.footerURL);
 
     // Возвращаем ответ.
     await interaction.reply({

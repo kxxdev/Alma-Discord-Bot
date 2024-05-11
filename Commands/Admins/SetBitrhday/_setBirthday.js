@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { guild } = interaction;
 
   // Загружаем данные из переменных.
@@ -16,8 +18,8 @@ const command = async (interaction) => {
     // Создаем эмбед.
     const embed = new EmbedBuilder()
       .setDescription(`Неверно указана дата рождения`)
-      .setColor(Number(colors.error))
-      .setImage(colors.footerURL);
+      .setColor(Number(designConfig.error))
+      .setImage(designConfig.footerURL);
 
     // Возвращаем ответ.
     return await interaction
@@ -35,10 +37,10 @@ const command = async (interaction) => {
   const embed = new EmbedBuilder()
     .setTitle('Дата рождения обновлена!')
     .setDescription(
-      `Пользователю установлена новая дата рождения ${colors.successEmoji}`
+      `Пользователю установлена новая дата рождения ${designConfig.successEmoji}`
     )
-    .setColor(Number(colors.success))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.success))
+    .setImage(designConfig.footerURL);
 
   // Возвращаем ответ.
   await interaction

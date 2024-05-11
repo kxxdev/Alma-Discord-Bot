@@ -1,9 +1,11 @@
 import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const command = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { member, guild, options } = interaction;
 
   // Получение переменных из команды.
@@ -54,8 +56,8 @@ const command = async (interaction) => {
     <#${guildDb?.channels?.logs?.id}> (логи)
     `
     )
-    .setColor(Number(colors.default))
-    .setImage(colors.footerURL);
+    .setColor(Number(designConfig.default))
+    .setImage(designConfig.footerURL);
 
   // Отвечаем на интеракцию
   await interaction.reply({

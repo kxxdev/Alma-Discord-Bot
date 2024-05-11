@@ -5,9 +5,11 @@ import {
 } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
-import colors from '../../../Config/colors.json' assert { type: 'json' };
 
 const inventoryStore = async (interaction) => {
+  // Получаем конфигурацию дизайна.
+  const designConfig = interaction.client.designConfig;
+
   const { member, guild } = interaction;
 
   if (interaction.customId != `storeInventory-${member.id}`)
@@ -30,10 +32,10 @@ const inventoryStore = async (interaction) => {
   if (selected === 'profile-backgrounds') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Карточки профиля')
-      .setDescription(`${colors.gsEmoji} Что вы хотите надеть?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(
@@ -45,10 +47,10 @@ const inventoryStore = async (interaction) => {
   } else if (selected === 'profile-frames') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Рамки профиля')
-      .setDescription(`${colors.gsEmoji} Что вы хотите надеть?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(
@@ -60,10 +62,10 @@ const inventoryStore = async (interaction) => {
   } else if (selected === 'profile-shadows') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(colors.default))
+      .setColor(Number(designConfig.default))
       .setImage('https://i.imgur.com/EbcNZBA.png')
       .setTitle('Рамки аватара')
-      .setDescription(`${colors.gsEmoji} Что вы хотите надеть?`);
+      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(
