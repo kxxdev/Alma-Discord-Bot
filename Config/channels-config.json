@@ -1,11 +1,11 @@
 {
   "PRODUCTION": {
     "spamChannelId": "1071587442550919219",
-    "helpChannelId": "1071789322593894460"
+    "helpChannelId": "1010147921238425600"
   },
 
   "DEVELOPMENT": {
-    "spamChannelId": "1071587442550919219",
+    "spamChannelId": "1005988757637451786",
     "helpChannelId": "1071789322593894460"
   }
 }
