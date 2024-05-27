@@ -9,7 +9,6 @@ const table = new ascii().setHeading('Name', 'Status');
 export default {
   name: 'ready',
   async execute(client) {
-    console.log('I am ready.');
     try {
       // Подключаем БД.
       await mongooseConnect(client);
