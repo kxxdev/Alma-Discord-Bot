@@ -2,29 +2,23 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { guild, options } = interaction;
 
   // Получение переменных из команды.
   const role = options.getRole('роль');
   const level = options.getNumber('уровень');
 
-  if ((role && !level) || (level && !role))
-    return await interaction
-      .reply({
-        embeds: [
-          new EmbedBuilder()
-            .setDescription(
-              'При добавлении роли необходимо указать оба пункта. Для просмотра текущих ролей не нужно указывать ничего.'
-            )
-            .setColor(Number(designConfig.error))
-            .setImage(designConfig.footerURL),
-        ],
-      })
-      .catch((err) => console.log(err));
+  if ((role && !level) || (level && !role)) {
+    return CommandCustomError(
+      interaction,
+      'При добавлении роли необходимо указать оба пункта. Для просмотра текущих ролей не нужно указывать ничего.'
+    );
+  }
 
   // Получаем экземпляр класса гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -36,7 +30,7 @@ const command = async (interaction) => {
   const roleLevels = [];
   for (let i = 0; i < guildDb.roles.levels.length; i++) {
     roleLevels.push(
-      `<@&${guildDb.roles.levels[i].role.id}> (${guildDb.roles.levels[i].level})`
+      `**${guildDb.roles.levels[i].level}** - <@&${guildDb.roles.levels[i].role.id}>`
     );
   }
 
@@ -45,10 +39,10 @@ const command = async (interaction) => {
     .reply({
       embeds: [
         new EmbedBuilder()
-          .setTitle('Текущие уровневые роли')
+          .setTitle('🔝 Текущие уровневые роли 🔝')
           .setDescription(`${roleLevels.join('\n')}`)
-          .setColor(Number(designConfig.default))
-          .setImage(designConfig.footerURL),
+          .setColor(DesignConfig.colors.levels)
+          .setImage(DesignConfig.footer.greyLineURL),
       ],
     })
     .catch((err) => console.log(err));

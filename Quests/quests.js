@@ -4,7 +4,7 @@ const quests = (interaction, info) => {
   try {
     switch (info.id) {
       case 'Main':
-        mainQuest(interaction, values);
+        mainQuest(interaction, info);
         break;
       default:
         break;

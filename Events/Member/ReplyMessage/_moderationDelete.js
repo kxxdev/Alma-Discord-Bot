@@ -8,7 +8,7 @@ const delMessageActions = ['уд', 'дел', 'del', 'мутч', 'мутчч', '�
 
 const timeoutDel = (message) => {
   setTimeout(() => {
-    message.delete().catch((err) => console.log(err));
+    message.delete().catch();
   }, 1000 * 5);
 };
 
@@ -24,7 +24,7 @@ const delMessage = async (message, action, text) => {
       .reply({ content: 'Ошибка. Я не могу получить исходное сообщение.' })
       .catch((err) => console.log(err));
   // Удаляем сообщение.
-  referenceMessage.delete().catch((err) => console.log(err));
+  referenceMessage.delete().catch();
 
   // Записываем время мута.
   let time = 0;

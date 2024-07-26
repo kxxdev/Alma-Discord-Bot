@@ -1,9 +1,18 @@
-import { EmbedBuilder, AttachmentBuilder } from 'discord.js';
+import {
+  EmbedBuilder,
+  AttachmentBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+} from 'discord.js';
 import { GlobalFonts, createCanvas, Image } from '@napi-rs/canvas';
 import Canvas from '@napi-rs/canvas';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { request } from 'undici';
+
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -189,7 +198,7 @@ const command = async (interaction) => {
   const guildDb = await new Guild().get({ id: guild.id });
 
   // Загружаем переменные
-  const targetUser = options.getUser('пользователь');
+  const targetUser = options?.getUser('пользователь');
 
   const user = targetUser || interaction.user;
 
@@ -368,9 +377,33 @@ const command = async (interaction) => {
     `Не удалось загрузить профиль`
   );
 
+  // Добавляем кнопки
+  const upgradeAttrubutesButton = new ButtonBuilder()
+    .setCustomId(`attributes-${member.id}`)
+    .setLabel(`${DesignConfig.emojis.perks}`)
+    .setStyle(ButtonStyle.Secondary);
+  const inventoryButton = new ButtonBuilder()
+    .setCustomId(`inventory-${member.id}`)
+    .setLabel(`${DesignConfig.emojis.inventory}`)
+    .setStyle(ButtonStyle.Secondary);
+  const activeSpellsButton = new ButtonBuilder()
+    .setCustomId(`activeSpells-${member.id}`)
+    .setLabel(`${DesignConfig.emojis.spells}`)
+    .setStyle(ButtonStyle.Secondary);
+  const row = new ActionRowBuilder().addComponents(
+    upgradeAttrubutesButton,
+    inventoryButton,
+    activeSpellsButton
+  );
+
   // Отправляем ответ.
   await interaction
-    .editReply({ embed: [embed], files: [attachment], ephemeral })
+    .editReply({
+      embed: [embed],
+      components: [row],
+      files: [attachment],
+      ephemeral,
+    })
     .catch((err) => console.log(err));
 };
 

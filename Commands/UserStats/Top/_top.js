@@ -3,6 +3,9 @@ import { EmbedBuilder } from 'discord.js';
 import User from '../../../Models/Users/User.js';
 import Guild from '../../../Models/Guilds/Guild.js';
 
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
+
 const expMn = (level, exp) => {
   let a = 0;
   for (let i = 1; i < level + 1; i++) {
@@ -15,9 +18,6 @@ const expMn = (level, exp) => {
 };
 
 const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
-
   const { guild, channel } = interaction;
   // Загружаем экземпляр класса гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -26,7 +26,7 @@ const command = async (interaction) => {
   const ephemeral = channel.id != guildDb.channels.spam.id;
 
   // Загружаем БД автора команды.
-  const users = await User.getAllInGuild({ guildId: guild.id });
+  const users = await User.getAll({ guildId: guild.id });
 
   const lenght = users.length > 10 ? 10 : users.length;
 
@@ -36,33 +36,33 @@ const command = async (interaction) => {
   for (let i = 0; i < lenght; i++) {
     if (i === 0) {
       toperis.push(
-        `**<:Top_Diamond:1169669622115598547>** **<:eris:1169666720852615228>  ${users[i].money.eris.value}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.diamond}** **${DesignConfig.guildEmojis.eris} ${users[i].money.eris.value}** • <@${users[i].id}>`
       );
     } else if (i === 1) {
       toperis.push(
-        `**<:Top_Platinum:1169669620555337728>** **<:eris:1169666720852615228>  ${users[i].money.eris.value}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.platinum}** **${DesignConfig.guildEmojis.eris}  ${users[i].money.eris.value}** • <@${users[i].id}>`
       );
     } else if (i === 2) {
       toperis.push(
-        `**<:Top_Gold:1169669617652859071>** **<:eris:1169666720852615228>  ${users[i].money.eris.value}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.gold}** **${DesignConfig.guildEmojis.eris}  ${users[i].money.eris.value}** • <@${users[i].id}>`
       );
     } else if (i === 3) {
       toperis.push(
-        `**<:Top_Silver:1169669615748665344>** **<:eris:1169666720852615228>  ${users[i].money.eris.value}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.silver}** **${DesignConfig.guildEmojis.eris}  ${users[i].money.eris.value}** • <@${users[i].id}>`
       );
     } else if (i === 4) {
       toperis.push(
-        `**<:Top_Bronze:1169669612615508040>** **<:eris:1169666720852615228>  ${users[i].money.eris.value}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.bronze}** **${DesignConfig.guildEmojis.eris}  ${users[i].money.eris.value}** • <@${users[i].id}>`
       );
     } else if (i === 9) {
       toperis.push(
-        `${i + 1}) <:eris:1169666720852615228>  ${
+        `${i + 1}) ${DesignConfig.guildEmojis.eris}  ${
           users[i].money.eris.value
         } • <@${users[i].id}>`
       );
     } else {
       toperis.push(
-        `  ${i + 1}) <:eris:1169666720852615228>  ${
+        `  ${i + 1}) ${DesignConfig.guildEmojis.eris}  ${
           users[i].money.eris.value
         } • <@${users[i].id}>`
       );
@@ -78,33 +78,33 @@ const command = async (interaction) => {
   for (let i = 0; i < lenght; i++) {
     if (i === 0) {
       topLevel.push(
-        `**<:Top_Diamond:1169669622115598547>** **<:exp:1169668013390303303>   ${users[i].levels.level}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.diamond}** **${DesignConfig.guildEmojis.exp} ${users[i].levels.level}** • <@${users[i].id}>`
       );
     } else if (i === 1) {
       topLevel.push(
-        `**<:Top_Platinum:1169669620555337728>** **<:exp:1169668013390303303>   ${users[i].levels.level}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.platinum}** **${DesignConfig.guildEmojis.exp} ${users[i].levels.level}** • <@${users[i].id}>`
       );
     } else if (i === 2) {
       topLevel.push(
-        `**<:Top_Gold:1169669617652859071>** **<:exp:1169668013390303303>   ${users[i].levels.level}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.gold}** **${DesignConfig.guildEmojis.exp} ${users[i].levels.level}** • <@${users[i].id}>`
       );
     } else if (i === 3) {
       topLevel.push(
-        `**<:Top_Silver:1169669615748665344>** **<:exp:1169668013390303303>   ${users[i].levels.level}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.silver}** **${DesignConfig.guildEmojis.exp} ${users[i].levels.level}** • <@${users[i].id}>`
       );
     } else if (i === 4) {
       topLevel.push(
-        `**<:Top_Bronze:1169669612615508040>** **<:exp:1169668013390303303>   ${users[i].levels.level}** • <@${users[i].id}>`
+        `**${DesignConfig.guildEmojis.top.bronze}** **${DesignConfig.guildEmojis.exp} ${users[i].levels.level}** • <@${users[i].id}>`
       );
     } else if (i === 9) {
       topLevel.push(
-        `${i + 1}) <:exp:1169668013390303303>   ${users[i].levels.level} • <@${
-          users[i].id
-        }> `
+        `${i + 1}) ${DesignConfig.guildEmojis.exp}   ${
+          users[i].levels.level
+        } • <@${users[i].id}> `
       );
     } else {
       topLevel.push(
-        `  ${i + 1}) <:exp:1169668013390303303>   ${
+        `  ${i + 1}) ${DesignConfig.guildEmojis.exp}   ${
           users[i].levels.level
         } • <@${users[i].id}> `
       );
@@ -113,7 +113,7 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setColor(Number(designConfig.default))
+    .setColor(DesignConfig.colors.purple)
     .setTitle('✨ Топ путешественников ✨')
     .setThumbnail(
       'https://media.discordapp.net/attachments/836998525329473576/1075634728918585394/AnyConv.com__3F3F3F3F3F3F3F3F3F3F3F53.png'
@@ -122,10 +122,10 @@ const command = async (interaction) => {
       `**Ранг приключений:**
 ${topLevel.join('\n')}
 
-**Эрис:**
+**Эрис ${DesignConfig.guildEmojis.eris}:**
 ${toperis.join('\n')}`
     )
-    .setImage(designConfig.footerGifURL);
+    .setImage(DesignConfig.footer.purpleGifLineURL);
 
   // Возвращаем ответ.
   await interaction

@@ -6,6 +6,7 @@ import { isPast, addMinutes } from 'date-fns';
 
 import rolesConfig from '../../Config/roles-config.json' assert { type: 'json' };
 import shopConfig from '../../Config/shop-config.json' assert { type: 'json' };
+import attConfig from '../../Config/attributes-config.js';
 
 // Класс пользователя.
 export default class User {
@@ -13,7 +14,6 @@ export default class User {
   constructor(obj) {
     this.id = obj?.id;
     this.notice = obj?.notice;
-    this.guild = obj?.guild;
     this.levels = obj?.levels;
     this.money = obj?.money;
     this.birthday = obj?.birthday;
@@ -26,9 +26,9 @@ export default class User {
   }
 
   // Получаем пользователя.
-  static async get({ id, guildId }) {
+  static async get({ id }) {
     try {
-      const userDb = await new UserService().get({ id, guildId });
+      const userDb = await new UserService().get({ id });
 
       return new User(userDb);
     } catch (err) {
@@ -37,14 +37,18 @@ export default class User {
   }
 
   // Получение всех пользователей в гильдии.
-  static async getAllInGuild({ guildId }) {
+  static async getAll() {
     try {
-      const users = await new UserService().getAllInGuild({ guildId });
+      const users = await new UserService().getAll();
 
       return users;
     } catch (err) {
       console.log(err);
     }
+  }
+
+  get eris() {
+    return this.money.eris.value;
   }
 
   // Получение инвентаря магазина
@@ -196,7 +200,7 @@ export default class User {
   async subEris({ num }) {
     try {
       // Записываем количество опыта для повышения.
-      const amount = num ? num : 1;
+      const amount = num ? num : 0;
 
       // Убавляем мору.
       this.money.eris.value -= amount;
@@ -559,83 +563,11 @@ export default class User {
     }
   }
 
-  // Получение текущего оружия.
-  async getActiveWeapon() {
-    try {
-      const weapon = this.inventory.weapons.find((weapon) => weapon.id === id);
-      if (!weapon)
-        return {
-          rareLevel: 1,
-          name: 'Тайна мира',
-          description:
-            'Неизвестное оружие, имеющее за собой что-то таинственное.',
-          level: 1,
-          type: 'Посох',
-          damage: 1,
-          price: 1,
-        };
-
-      return weapon;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Установка оружия активным.
-  async getWeapon({ id }) {
-    try {
-      const weapon = this.inventory.weapons.find((weapon) => weapon.id === id);
-      if (!weapon)
-        return {
-          rareLevel: 1,
-          name: 'Тайна мира',
-          description:
-            'Неизвестное оружие, имеющее за собой что-то таинственное.',
-          level: 1,
-          type: 'Посох',
-          damage: 1,
-          price: 1,
-        };
-
-      this.inventory.weapon.id = weapon.id;
-
-      await this.update({ inventory: { weapon: this.inventory.weapon } });
-
-      return weapon;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Добавление нового оружия
-  async giveWeapon({ weapon }) {
-    try {
-      this.inventory.weapons.push(weapon);
-
-      await this.update({ inventory: { weapons: this.inventory.weapons } });
-      return weapon;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Удаление оружия
-  async removeWeapon({ index }) {
-    try {
-      this.inventory.weapons.splice(index, 1);
-
-      await this.update({ inventory: { weaposn: this.inventory.weapons } });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   // Обновление базы данных пользователя.
   async update(obj) {
     try {
       await new UserService().update({
         id: this.id,
-        guild: { id: this.guild.id },
         ...obj,
       });
     } catch (err) {

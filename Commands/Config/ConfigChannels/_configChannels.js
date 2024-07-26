@@ -2,11 +2,11 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
-  const { member, guild, options } = interaction;
+const command = async (interaction) => {
+  const { guild, options } = interaction;
 
   // Получение переменных из команды.
   const spamChannel = options.getChannel('спам');
@@ -56,8 +56,8 @@ const command = async (interaction) => {
     <#${guildDb?.channels?.logs?.id}> (логи)
     `
     )
-    .setColor(Number(designConfig.default))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.default)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Отвечаем на интеракцию
   await interaction.reply({

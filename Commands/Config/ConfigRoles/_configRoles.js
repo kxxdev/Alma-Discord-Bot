@@ -2,10 +2,10 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { options, guild } = interaction;
 
   // Получение переменных из команды.
@@ -72,8 +72,8 @@ const command = async (interaction) => {
     <@&${guildDb?.roles?.ork?.id}> (орк)
     <@&${guildDb?.roles?.gnome?.id}> (гном)`
     )
-    .setColor(Number(designConfig.default))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.default)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Отвечаем на интеракцию
   await interaction.reply({

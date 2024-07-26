@@ -3,10 +3,11 @@ import { EmbedBuilder } from 'discord.js';
 import Guild from '../../../Models/Guilds/Guild.js';
 import User from '../../../Models/Users/User.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { CommandCustomError } from '../../CommandsError.js';
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { guild, member, options } = interaction;
 
   // Загружаем данные из переменных.
@@ -14,17 +15,10 @@ const command = async (interaction) => {
   const num = Math.floor(options.getNumber('количество'));
 
   if (user.id === member.id) {
-    return await interaction
-      .reply({
-        embeds: [
-          new EmbedBuilder()
-            .setDescription(`Вы не можете передавать эрис самому себе`)
-            .setColor(Number(designConfig.error))
-            .setImage(designConfig.footerURL),
-        ],
-        ephemeral: true,
-      })
-      .catch((err) => console.log(err));
+    return CommandCustomError(
+      interaction,
+      `Вы не можете передавать эрис ${DesignConfig.guildEmojis.eris} самому себе.`
+    );
   }
 
   // Загружаем БД автора команды.
@@ -35,34 +29,18 @@ const command = async (interaction) => {
 
   // Проверка на мультиакк.
   if (userDb.notice.twink.status) {
-    return await interaction
-      .reply({
-        embeds: [
-          new EmbedBuilder()
-            .setDescription(
-              `Ваш аккаунт подозревается в мультиаккаунтинге. Напишите администрации для решения проблемы в <#${guildDb.channels.feedback.id}>`
-            )
-            .setColor(Number(designConfig.error))
-            .setImage(designConfig.footerURL),
-        ],
-        ephemeral: true,
-      })
-      .catch((err) => console.log(err));
+    return CommandCustomError(
+      interaction,
+      `Ваш аккаунт подозревается в мультиаккаунтинге.\n\nНапишите администрации для решения проблемы в <#${guildDb.channels.feedback.id}>`
+    );
   }
 
   // Проверяем значения.
   if (num < 1 || num > userDb.money.eris.value) {
-    return await interaction
-      .reply({
-        embeds: [
-          new EmbedBuilder()
-            .setDescription(`Неверно указано количество.`)
-            .setColor(Number(designConfig.error))
-            .setImage(designConfig.footerURL),
-        ],
-        ephemeral: true,
-      })
-      .catch((err) => console.log(err));
+    return CommandCustomError(
+      interaction,
+      `Неверно указано количество.\nВозможно у вас не хватает эрис ${DesignConfig.guildEmojis.eris}`
+    );
   }
 
   // Загружаем БД таргет мембера.
@@ -75,10 +53,10 @@ const command = async (interaction) => {
   // Создаем эмбед.
   const embed = new EmbedBuilder()
     .setDescription(
-      `<@${member.id}> передал(а) \`${num}\` <:eris:1169666720852615228>  <@${user.id}>.`
+      `<@${member.id}> передал(а) \`${num}\` ${DesignConfig.guildEmojis.eris} <@${user.id}>.`
     )
-    .setColor(Number(designConfig.success))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.success)
+    .setImage(DesignConfig.footer.purpleGifLineURL);
 
   // Возвращаем ответ.
   await interaction

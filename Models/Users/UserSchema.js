@@ -1,6 +1,5 @@
 import { subDays } from 'date-fns';
 import mongoose from 'mongoose';
-import uniqid from 'uniqid';
 const { Schema } = mongoose;
 
 const modelName = 'users';
@@ -12,9 +11,6 @@ const schema = new Schema({
       status: { type: Boolean, default: false },
       notice: { type: String, default: 'Не указано' },
     },
-  },
-  guild: {
-    id: { type: String, required: true },
   },
   levels: {
     level: { type: Number, default: 1, min: 1, max: 100 },
@@ -114,25 +110,6 @@ const schema = new Schema({
         ],
       },
     },
-    weapon: {
-      id: { type: String, default: 'none' },
-    },
-    weapons: [
-      {
-        id: { type: String, required: true },
-        uniqId: { type: String, default: uniqid() },
-        rareLevel: { type: Number, default: 1 },
-        name: { type: String, default: 'Тайна мира' },
-        description: {
-          type: String,
-          default: 'Неизвестное оружие, имеющее за собой что-то таинственное.',
-        },
-        level: { type: Number, default: 1 },
-        type: { type: String, default: 'Посох' },
-        damage: { type: Number, default: 1 },
-        price: { type: Number, default: 1 },
-      },
-    ],
   },
   quests: [
     {
@@ -155,4 +132,6 @@ const schema = new Schema({
   },
 });
 
-export default mongoose.model(modelName, schema);
+const Model = mongoose.model(modelName, schema);
+
+export default Model;

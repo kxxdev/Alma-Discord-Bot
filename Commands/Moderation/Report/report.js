@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
-
-import commandsError from '../../commandsError.js';
 import func from './_report.js';
+import { CommandChannelDM, CommandError } from '../../CommandsError.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -28,7 +27,7 @@ export default {
   async execute(interaction) {
     // Если команда была прописана в личке.
     if (interaction.channel.type === 1) {
-      return await commandsError.commandChannelDM(interaction);
+      return await CommandChannelDM(interaction);
     }
 
     // Запускаем команду.
@@ -36,7 +35,7 @@ export default {
       await func(interaction);
     } catch (err) {
       console.log(err);
-      commandsError.commandError(interaction);
+      CommandError(interaction);
     }
   },
 };

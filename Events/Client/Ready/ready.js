@@ -1,3 +1,4 @@
+import { Events } from 'discord.js';
 import ascii from 'ascii-table';
 import startFunctions from './_startFunctions.js';
 import mongooseConnect from './_mongooseConnect.js';
@@ -7,7 +8,8 @@ import packageFile from '../../../package.json' assert { type: 'json' };
 const table = new ascii().setHeading('Name', 'Status');
 
 export default {
-  name: 'ready',
+  name: Events.ClientReady,
+  once: true,
   async execute(client) {
     try {
       // Подключаем БД.
@@ -30,7 +32,10 @@ export default {
       } else {
         table.addRow('MongoDB', 'disconnected');
       }
+      console.log(' ');
       console.log(table.toString(), '\nTHE BOT HAS STARTED');
+      console.log(' ');
+      console.log(' ');
     } catch (err) {
       console.log(err);
     }

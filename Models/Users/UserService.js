@@ -1,26 +1,23 @@
 import UserSchema from '../../Models/Users/UserSchema.js';
 
 export default class UserService {
-  async get({ id, guildId }) {
-    let db = await UserSchema.findOne({ id, guild: { id: guildId } });
+  async get({ id }) {
+    let db = await UserSchema.findOne({ id });
     if (!db) {
-      await UserSchema.create({ id, guild: { id: guildId } });
-      db = await UserSchema.findOne({ id, guild: { id: guildId } });
+      await UserSchema.create({ id });
+      db = await UserSchema.findOne({ id });
     }
 
     return db;
   }
 
-  async getAllInGuild({ guildId }) {
+  async getAll() {
     let db;
-    db = await UserSchema.find({ guild: { id: guildId } });
+    db = await UserSchema.find({});
     return db;
   }
 
   async update(object) {
-    await UserSchema.updateOne(
-      { id: object.id, guild: { id: object.guild.id } },
-      object
-    );
+    await UserSchema.updateOne({ id: object.id }, object);
   }
 }

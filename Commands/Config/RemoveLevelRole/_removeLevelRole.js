@@ -2,10 +2,10 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { options, guild } = interaction;
 
   // Получение переменных из команды.
@@ -21,7 +21,7 @@ const command = async (interaction) => {
   const roleLevels = [];
   for (let i = 0; i < guildDb.roles.levels.length; i++) {
     roleLevels.push(
-      `<@&${guildDb.roles.levels[i].role.id}> (${guildDb.roles.levels[i].level})`
+      `**${guildDb.roles.levels[i].level}** - <@&${guildDb.roles.levels[i].role.id}>`
     );
   }
 
@@ -32,8 +32,8 @@ const command = async (interaction) => {
         new EmbedBuilder()
           .setTitle('Текущие уровневые роли')
           .setDescription(`${roleLevels.join('\n')}`)
-          .setColor(Number(designConfig.default))
-          .setImage(designConfig.footerURL),
+          .setColor(DesignConfig.colors.levels)
+          .setImage(DesignConfig.footer.greyLineURL),
       ],
     })
     .catch((err) => console.log(err));

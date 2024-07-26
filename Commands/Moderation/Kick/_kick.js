@@ -1,24 +1,22 @@
 import { EmbedBuilder } from 'discord.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
-  const { channel, options, member } = interaction;
+const command = async (interaction) => {
+  const { options, member } = interaction;
 
   const user = options.getUser('пользователь');
   const reason = options.getString('причина') || 'Причина не указана.';
 
   const targetMember = await interaction.guild.members.fetch(user.id);
 
-  const errEmbed = new EmbedBuilder()
-    .setDescription(
-      `Вы не можете выгнать <@${user.id}> так как у него есть высшая роль.`
-    )
-    .setColor(0xc723b);
-
   if (targetMember.roles.highest.position >= member.roles.highest.position) {
-    return interaction.reply({ embeds: [errEmbed], ephemeral: true });
+    return CommandCustomError(
+      interaction,
+      `Вы не можете выгнать <@${user.id}> так как у него есть высшая роль.`
+    );
   }
 
   await member.kick(reason);
@@ -30,8 +28,8 @@ const command = async (interaction) => {
       Причина: *${reason}*
       Тавернщик: <@${member.id}>`
     )
-    .setColor(Number(designConfig.default))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.success)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Возвращаем ответ.
   await interaction

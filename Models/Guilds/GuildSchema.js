@@ -1,4 +1,4 @@
-import mongoose from'mongoose';
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 import uniqid from 'uniqid';
 
@@ -58,4 +58,6 @@ const schema = new Schema({
   ],
 });
 
-export default mongoose.model(modelName, schema);
+const Model = mongoose.model(modelName, schema);
+
+export default Model;

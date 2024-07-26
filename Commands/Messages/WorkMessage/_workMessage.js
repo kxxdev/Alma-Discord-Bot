@@ -4,36 +4,39 @@ import {
   StringSelectMenuBuilder,
 } from 'discord.js';
 
-const workValues = (workName, designConfig) => {
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
+
+const workValues = (workName) => {
   switch (workName) {
     case 'Фермер':
       return {
         embedImageUrl:
           'https://media.discordapp.net/attachments/836998525329473576/1179962717075943555/db1b6c7f4d32a880.png?ex=657bb0ea&is=65693bea&hm=5e4fa57975e43aff89a30b4e400061f043f25c1fd23435f400f4760179c522b4&=&format=webp&quality=lossless',
-        mainImageUrl: designConfig.footerURL,
-        title: 'Работа на ферме',
-        description: 'Что вы хотите собрать?',
+        mainImageUrl: DesignConfig.footer.greyLineURL,
+        title: '🌽 Работа на ферме 🌽',
+        description: `${DesignConfig.guildEmojis.gs} Что вы хотите собрать?`,
         selectMenu: new StringSelectMenuBuilder()
           .setCustomId('work-farmer-message')
-          .setPlaceholder('Собрать..')
+          .setPlaceholder('🌿 Собрать..')
           .addOptions(
             {
               label: 'Пшеница',
               description: 'Собрать пшеницу',
               value: 'wheat',
-              emoji: '1168512203163443210',
+              emoji: DesignConfig.guildEmojis.wheat,
             },
             {
               label: 'Хмель',
               description: 'Собрать хмель',
               value: 'hops',
-              emoji: '1168512200743321652',
+              emoji: DesignConfig.guildEmojis.hops,
             },
             {
               label: 'Виноград',
               description: 'Собрать виноград',
               value: 'grapes',
-              emoji: '1168512197530501180',
+              emoji: DesignConfig.guildEmojis.grape,
             }
           ),
       };
@@ -41,30 +44,30 @@ const workValues = (workName, designConfig) => {
       return {
         embedImageUrl:
           'https://media.discordapp.net/attachments/836998525329473576/1179964759886544926/FarmWork_7.png?ex=657bb2d1&is=65693dd1&hm=4ed946c67545bbef0c69f9f71b9b2b05af3aa56077171ff504be64efdab76472&=&format=webp&quality=lossless',
-        mainImageUrl: designConfig.footerURL,
-        title: 'Работа на пивоварне',
-        description: 'Что вы хотите сварить?',
+        mainImageUrl: DesignConfig.footer.greyLineURL,
+        title: '🍺 Работа на пивоварне 🍺',
+        description: `${DesignConfig.guildEmojis.gs} Что вы хотите сварить?`,
         selectMenu: new StringSelectMenuBuilder()
           .setCustomId('work-brewer-message')
-          .setPlaceholder('Сварить..')
+          .setPlaceholder('🍻 Сварить..')
           .addOptions(
             {
               label: 'Лимонад',
               description: 'Сварить лимонад',
               value: 'lemonade',
-              emoji: '1180242936923963443',
+              emoji: DesignConfig.guildEmojis.lemonade,
             },
             {
               label: 'Светлое пиво',
               description: 'Сварить светлое пиво',
               value: 'whiteBeer',
-              emoji: '1180242840459157535',
+              emoji: DesignConfig.guildEmojis.lightBeer,
             },
             {
               label: 'Темное пиво',
               description: 'Сварить темное пиво',
               value: 'darkBeer',
-              emoji: '1180242893374492693',
+              emoji: DesignConfig.guildEmojis.darkBeer,
             }
           ),
       };
@@ -72,22 +75,19 @@ const workValues = (workName, designConfig) => {
 };
 
 const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
-
   const { channel } = interaction;
 
   const workName = interaction.options.getString('работа');
-  const work = workValues(workName, designConfig);
+  const work = workValues(workName);
 
   // Создаем эмбед с изображением.
   const embedImage = new EmbedBuilder()
-    .setColor(Number(designConfig.default))
+    .setColor(DesignConfig.colors.work)
     .setImage(work.embedImageUrl);
 
   // Создаем эмбед с основным текстом.
   const embedMain = new EmbedBuilder()
-    .setColor(Number(designConfig.default))
+    .setColor(DesignConfig.colors.work)
     .setImage(work.mainImageUrl)
     .setTitle(work.title)
     .setDescription(work.description);
@@ -102,9 +102,9 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Сообщение отправлено ${designConfig.successEmoji}`)
-    .setColor(Number(designConfig.success))
-    .setImage(designConfig.footerURL);
+    .setDescription(`Сообщение отправлено ${DesignConfig.emojis.success}`)
+    .setColor(DesignConfig.colors.success)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Возвращаем ответ.
   await interaction

@@ -3,10 +3,11 @@ import { EmbedBuilder } from 'discord.js';
 import Guild from '../../../Models/Guilds/Guild.js';
 import User from '../../../Models/Users/User.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { guild, member, options } = interaction;
 
   // Загружаем экземпляр гильдии.
@@ -16,17 +17,10 @@ const command = async (interaction) => {
   const userDb = await User.get({ id: member.id, guildId: guild.id });
 
   if (userDb.birthday?.day || userDb.birthday?.month) {
-    const embed = new EmbedBuilder()
-      .setDescription(
-        `У вас уже указан день рождения. Для смены обратитесь в <#${guildDb.channels.feedback.id}>`
-      )
-      .setColor(Number(designConfig.error))
-      .setImage(designConfig.footerURL);
-
-    // Возвращаем ответ.
-    return await interaction
-      .reply({ embeds: [embed], ephemeral: true })
-      .catch((err) => console.log(err));
+    return CommandCustomError(
+      interaction,
+      `У вас уже указан день рождения. Для смены обратитесь в <#${guildDb.channels.feedback.id}>`
+    );
   }
 
   // Загружаем данные из переменных.
@@ -35,15 +29,7 @@ const command = async (interaction) => {
 
   // Проверяем значения.
   if (day > 31 || day < 1 || month < 1 || month > 12) {
-    const embed = new EmbedBuilder()
-      .setDescription(`Неверно указана дата рождения.`)
-      .setColor(Number(designConfig.error))
-      .setImage(designConfig.footerURL);
-
-    // Возвращаем ответ.
-    return await interaction
-      .reply({ embeds: [embed], ephemeral: true })
-      .catch((err) => console.log(err));
+    return CommandCustomError(interaction, `Неверно указана дата рождения.`);
   }
 
   // Устанавливаем дату рождения.
@@ -55,8 +41,8 @@ const command = async (interaction) => {
     .setDescription(
       `Теперь ваша дата рождения будет указываться в вашем профиле. Для смены напишите в <#${guildDb.channels.feedback.id}>.`
     )
-    .setColor(Number(designConfig.default))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.success)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Возвращаем ответ.
   await interaction

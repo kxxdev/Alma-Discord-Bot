@@ -1,9 +1,10 @@
 import { EmbedBuilder } from 'discord.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { options, member, guild } = interaction;
 
   const userId = options.getString('id-пользователя');
@@ -19,24 +20,18 @@ const command = async (interaction) => {
   Причина: *${reason}*
   Тавернщик: <@${member.id}>`
       )
-      .setColor(Number(designConfig.success))
-      .setImage(designConfig.footerURL);
+      .setColor(DesignConfig.colors.success)
+      .setImage(DesignConfig.footer.greyLineURL);
 
     // Возвращаем ответ.
     await interaction
       .reply({ embeds: [embed], ephemeral: true })
       .catch((err) => console.log(err));
   } catch (err) {
-    const errEmbed = new EmbedBuilder()
-      .setDescription(`Пользователь с таким ID не заблокирован.`)
-      .setColor(Number(designConfig.error))
-      .setImage(designConfig.footerURL);
-
-    // Возвращаем ответ.
-    await interaction.reply({
-      embeds: [errEmbed],
-      ephemeral: true,
-    });
+    CommandCustomError(
+      interaction,
+      `Пользователь с таким ID не заблокирован  ${DesignConfig.emojis.denie}`
+    );
   }
 };
 

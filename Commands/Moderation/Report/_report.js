@@ -2,10 +2,11 @@ import { EmbedBuilder } from 'discord.js';
 
 import Guild from '../../../Models/Guilds/Guild.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { guild, member } = interaction;
   // Загружаем экземпляр гильдии.
   const guildDb = await new Guild().get({ id: guild.id });
@@ -18,42 +19,44 @@ const command = async (interaction) => {
     (option) => option.name === 'жалоба'
   )?.value;
 
-  // Создаем эмбед.
-  const embedReport = new EmbedBuilder()
-    .setColor(Number(designConfig.error))
-    .setTitle('Жалоба')
-    .setDescription(
-      `<@${member.id}> оставил(а) жалобу на пользователя <@${user.id}>: \`\`\`${reason}\`\`\``
-    )
-    .setImage(designConfig.footerURL)
-    .setThumbnail(user.displayAvatarURL());
-
   // Получаем канал уведомлений команды.
   const channel = await guild.channels.cache.find(
     (channel) => channel.id === guildDb.channels.reports.id
   );
 
   if (!channel) {
-    return await interaction.reply({
-      content: 'Не задан канал для жалоб, обратитесь к администрации.',
-      ephemeral: true,
-    });
+    return CommandCustomError(
+      interaction,
+      'Не задан канал для жалоб, обратитесь к администрации.'
+    );
   }
+
+  // Создаем эмбед.
+  const embedReport = new EmbedBuilder()
+    .setColor(DesignConfig.colors.default)
+    .setTitle('Жалоба')
+    .setDescription(
+      `<@${member.id}> оставил(а) жалобу на пользователя <@${user.id}>: \`\`\`${reason}\`\`\``
+    )
+    .setImage(DesignConfig.footer.greyLineURL)
+    .setThumbnail(user.displayAvatarURL());
 
   // Если канал уведомлений найден, то выводим сообщение.
   if (channel) {
-    await embedReport
+    await channel
       .send({
-        embeds: [embed],
+        embeds: [embedReport],
       })
       .catch((err) => console.log(err));
   }
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setDescription(`Ваша жалоба была отправлена ${designConfig.successEmoji}`)
-    .setColor(Number(designConfig.success))
-    .setImage(designConfig.footerURL);
+    .setDescription(
+      `Ваша жалоба была отправлена ${DesignConfig.emojis.success}`
+    )
+    .setColor(DesignConfig.colors.success)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Возвращаем ответ.
   await interaction

@@ -1,23 +1,10 @@
-import {
-  EmbedBuilder,
-  StringSelectMenuBuilder,
-  ActionRowBuilder,
-} from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
-const gs = '<:green:1072353757007986750>';
-const ps = '<:pink:1072353875958444082>';
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
-const ageRoles = {
-  min14: '1072572457413779577',
-  plus14: '1072572504796831784',
-  plus16: '1072572536602239077',
-  plus18: '1072572555191386203',
-};
-
-const genderRoles = {
-  male: '1072572309430337576',
-  female: '1072572355156639744',
-};
+const gs = DesignConfig.guildEmojis.gs;
+const ps = DesignConfig.guildEmojis.ps;
 
 const infoMessage = async (interaction) => {
   // Записываем выбранное значение.
@@ -34,7 +21,7 @@ const infoMessage = async (interaction) => {
     // Записываем сообщение с форумом.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Газета** - форум нашего города
 
@@ -44,7 +31,7 @@ ${ps} <#1071586393198956564> *Мы будем рады видеть любые �
     // Записываем первое сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Стойка информации** - информационный раздел сервера
 
@@ -56,7 +43,7 @@ ${gs} <#809404973548306432> - городские новости`)
     // Записываем второе сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Округа** - основной текстовый раздел сервера
 
@@ -69,7 +56,7 @@ ${ps} <#1074091482178408528> - делитесь вашими фоточками`
     // Записываем третье сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Голосовые** - основной голосовой раздел сервера
 
@@ -82,7 +69,7 @@ ${gs} Ниже идут второстепенные каналы, где вы �
     // Записываем четвертое сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Доска посетителей** - раздел для креатива и обратной связи
 
@@ -97,7 +84,7 @@ ${ps} <#1071789322593894460> - обратная связь`)
     // Записываем первое сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Роли администрации**
 
@@ -112,7 +99,7 @@ ${ps} <@&1075677525608501309> - они делают визуальное офо�
     // Записываем второе сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Уровни**
 
@@ -132,66 +119,6 @@ ${ps} <@&1071586770455629844>
 ${gs} <@&1071586750473965639>
 ${ps} <@&1071586712125440073>`)
     );
-
-    // Записываем третье сообщение.
-    //       embeds.push(
-    //         new EmbedBuilder()
-    //           .setColor(0x2f3136)
-    //           .setImage('https://i.imgur.com/EbcNZBA.png')
-    //           .setDescription(`**${gs} Получение ролей**
-
-    // Для удобного поиска напарников вы можете выбрать себе роли`)
-    //       );
-
-    //       // Добавляем селект-меню.
-    //       components.push(
-    //         new ActionRowBuilder().addComponents(
-    //           new StringSelectMenuBuilder()
-    //             .setCustomId('age-message')
-    //             .setPlaceholder('Выбрать возраст..')
-    //             .addOptions(
-    //               {
-    //                 label: 'Младше 14',
-    //                 description: 'Если вам меньше 14 лет.',
-    //                 value: 'min14',
-    //               },
-    //               {
-    //                 label: 'Старше 14',
-    //                 description: 'Если вам больше 14 лет.',
-    //                 value: 'plus14',
-    //               },
-    //               {
-    //                 label: 'Старше 16',
-    //                 description: 'Если вам больше 16 лет',
-    //                 value: 'plus16',
-    //               },
-    //               {
-    //                 label: 'Старше 18',
-    //                 description: 'Если вам больше 18 лет',
-    //                 value: 'plus18',
-    //               }
-    //             )
-    //         )
-    //       );
-    //       components.push(
-    //         new ActionRowBuilder().addComponents(
-    //           new StringSelectMenuBuilder()
-    //             .setCustomId('gender-message')
-    //             .setPlaceholder('Выбрать пол..')
-    //             .addOptions(
-    //               {
-    //                 label: 'Мужской',
-    //                 description: 'Для мужчин.',
-    //                 value: 'male',
-    //               },
-    //               {
-    //                 label: 'Женский',
-    //                 description: 'Для женщин.',
-    //                 value: 'female',
-    //               }
-    //             )
-    //         )
-    //       );
   }
 
   // Если выбраны команды.
@@ -199,7 +126,7 @@ ${ps} <@&1071586712125440073>`)
     // Записываем первое сообщение.
     embeds.push(
       new EmbedBuilder()
-        .setColor(0x2f3136)
+        .setColor(DesignConfig.colors.info)
         .setImage('https://i.imgur.com/EbcNZBA.png')
         .setDescription(`**${gs} Альма**
 
@@ -214,72 +141,6 @@ ${gs} \`/pay\` - передать эрис
 
 ${ps} **Прочее:**
 ${gs} \`/report\` - отправить жалобу`)
-    );
-
-    // Записываем второе сообщение.
-    //             embeds.push(new EmbedBuilder()
-    //                 .setColor(0x2F3136)
-    //                 .setImage('https://i.imgur.com/EbcNZBA.png')
-    //                 .setDescription(`**${gs} Юнь Цзинь**
-
-    // ${ps} \`/play\` - включить трек выбрав из результатов поиска
-    // ${gs} \`/repeat\` - зациклить трек ии очередь треков`)
-    //             );
-  }
-
-  // Если выбрана роль возраста.
-  else if (interaction.customId === 'age-message') {
-    // Записываем id роли.
-    const roleId = ageRoles[selected];
-
-    // Выдаём роль.
-    await interaction.member.roles.add(roleId).catch((err) => console.log(err));
-
-    // Снимаем остальные роли.
-    for (const key in ageRoles) {
-      if (
-        interaction.member.roles.cache.has(ageRoles[key]) &&
-        ageRoles[key] != roleId
-      )
-        await interaction.member.roles
-          .remove(ageRoles[key])
-          .catch((err) => console.log(err));
-    }
-
-    // Добавляем эмбед.
-    embeds.push(
-      new EmbedBuilder()
-        .setColor(0x2f3136)
-        .setImage('https://i.imgur.com/EbcNZBA.png')
-        .setDescription(`${gs} Вы получили роль <@&${roleId}>!`)
-    );
-  }
-
-  // Если выбрана роль возраста.
-  else if (interaction.customId === 'gender-message') {
-    // Записываем id роли.
-    const roleId = genderRoles[selected];
-
-    // Выдаём роль.
-    await interaction.member.roles.add(roleId).catch((err) => console.log(err));
-
-    // Снимаем остальные роли.
-    for (const key in genderRoles) {
-      if (
-        interaction.member.roles.cache.has(genderRoles[key]) &&
-        genderRoles[key] != roleId
-      )
-        await interaction.member.roles
-          .remove(genderRoles[key])
-          .catch((err) => console.log(err));
-    }
-
-    // Добавляем эмбед.
-    embeds.push(
-      new EmbedBuilder()
-        .setColor(0x2f3136)
-        .setImage('https://i.imgur.com/EbcNZBA.png')
-        .setDescription(`${gs} Вы получили роль <@&${roleId}>!`)
     );
   }
 

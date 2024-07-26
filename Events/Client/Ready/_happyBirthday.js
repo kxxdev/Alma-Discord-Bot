@@ -20,7 +20,7 @@ const happyBirthday = async (client) => {
       const guildDb = await new Guild().get({ id: guild.id });
 
       // Получаем всех пользователей.
-      const users = await User.getAllInGuild({ guildId: guild.id });
+      const users = await User.getAll({ guildId: guild.id });
 
       // Проходимся по пользователям.
       users.forEach(async (user) => {

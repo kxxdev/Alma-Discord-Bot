@@ -4,21 +4,13 @@ import {
   ActionRowBuilder,
 } from 'discord.js';
 
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
+
 import User from '../../../Models/Users/User.js';
 
 const inventoryStore = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
-
   const { member, guild } = interaction;
-
-  if (interaction.customId != `storeInventory-${member.id}`)
-    return await interaction
-      .reply({
-        content: 'Это не ваш инвентарь!',
-        ephemeral: true,
-      })
-      .catch((err) => console.log(err));
 
   // Получаем значения нажатой кнопки.
   const selected = interaction.values[0];
@@ -29,43 +21,57 @@ const inventoryStore = async (interaction) => {
   const userDb = await User.get({ id: member.id, guildId: guild.id });
   const userShopInventory = await userDb.getShopInventory({ type: selected });
 
+  if (userShopInventory.length === 0) {
+    userShopInventory.push({
+      label: 'Ваш инвентарь магазина пуст..',
+      value: 'none',
+      emoji: DesignConfig.emojis.denie,
+    });
+  }
+
   if (selected === 'profile-backgrounds') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(designConfig.default))
+      .setColor(DesignConfig.colors.shop)
       .setImage('https://i.imgur.com/EbcNZBA.png')
-      .setTitle('Карточки профиля')
-      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
+      .setTitle(
+        `${DesignConfig.guildEmojis.shop} Карточки профиля ${DesignConfig.guildEmojis.shop}`
+      )
+      .setDescription(`${DesignConfig.guildEmojis.gs} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(
       new StringSelectMenuBuilder()
         .setCustomId('profile-cards-message-backgrounds')
-        .setPlaceholder('Витрина..')
+        .setPlaceholder(`Витрина..`)
         .addOptions(userShopInventory)
     );
   } else if (selected === 'profile-frames') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(designConfig.default))
+      .setColor(DesignConfig.colors.shop)
       .setImage('https://i.imgur.com/EbcNZBA.png')
-      .setTitle('Рамки профиля')
-      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
+      .setTitle(
+        `${DesignConfig.guildEmojis.shop} Рамки профиля ${DesignConfig.guildEmojis.shop}`
+      )
+      .setDescription(`${DesignConfig.guildEmojis.gs} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(
       new StringSelectMenuBuilder()
         .setCustomId('profile-cards-message-frames')
-        .setPlaceholder('Витрина..')
+        .setPlaceholder(`Витрина..`)
         .addOptions(userShopInventory)
     );
   } else if (selected === 'profile-shadows') {
     // Создаем эмбед с основным текстом.
     embedMain
-      .setColor(Number(designConfig.default))
+      .setColor(DesignConfig.colors.shop)
       .setImage('https://i.imgur.com/EbcNZBA.png')
-      .setTitle('Рамки аватара')
-      .setDescription(`${designConfig.gsEmoji} Что вы хотите надеть?`);
+      .setTitle(
+        `${DesignConfig.guildEmojis.shop} Рамки аватара ${DesignConfig.guildEmojis.shop}`
+      )
+      .setDescription(`${DesignConfig.guildEmojis.gs} Что вы хотите надеть?`);
 
     // Создаем селект меню.
     row.addComponents(

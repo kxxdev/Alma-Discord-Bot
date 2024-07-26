@@ -2,10 +2,10 @@ import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+const DesignConfig = GetDesignConfig();
 
+const command = async (interaction) => {
   const { options, guild } = interaction;
 
   // Получаем значение переменной.
@@ -16,18 +16,18 @@ const command = async (interaction) => {
 
   // Записываем статус пользователя.
   const twinkStatus = userDb.notice.twink.status
-    ? 'Подозрение на твинк'
-    : 'Нет подозрений на твинк';
+    ? `__Подозрение на твинк__ ${DesignConfig.emojis.danger}`
+    : `Нет подозрений на твинк ${DesignConfig.emojis.clear}`;
 
   // Создаем эмбед-ответ.
   const embed = new EmbedBuilder()
     .setDescription(
-      `**Статус пользователя <@${user.id}>:** ${twinkStatus}
+      `**Статус пользователя <@${user.id}>: - ${twinkStatus}**
         
         **Причина:** ${userDb.notice.twink.notice}`
     )
-    .setColor(Number(designConfig.default))
-    .setImage(designConfig.footerURL);
+    .setColor(DesignConfig.colors.default)
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Отвечаем на интеракцию
   await interaction.reply({

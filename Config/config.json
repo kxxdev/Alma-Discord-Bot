@@ -1,0 +1,9 @@
+{
+  "PRODUCTION": {
+    "maxGuns": 10
+  },
+
+  "DEVELOPMENT": {
+    "maxGuns": 10
+  }
+}

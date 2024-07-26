@@ -5,10 +5,11 @@ import { addHours, isPast } from 'date-fns';
 
 import getTimeLeft from '../../../Functions/dateFunctions.js';
 
-const workMessage = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../../Commands/CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
+const workMessage = async (interaction) => {
   // Записываем выбранное значение.
   const selected = interaction.values[0];
 
@@ -17,7 +18,7 @@ const workMessage = async (interaction) => {
 
   // Загружаем экземпляр пользователя.
   const userDb = await User.get({ id: member.id, guildId: guild.id });
-  console.log(interaction.customId);
+
   // Проверяем было ли это принятие на работу
   if (interaction.customId === 'work-join-message') {
     // Проверяем был ли пользователь уже трудоустроен.
@@ -26,7 +27,7 @@ const workMessage = async (interaction) => {
         ephemeral: true,
         embeds: [
           new EmbedBuilder()
-            .setColor(Number(designConfig.error))
+            .setColor(DesignConfig.colors.work)
             .setDescription(
               `**Вы уже устроены на работу. Чтобы сменить ее вам нужно уволиться.**
           
@@ -55,7 +56,7 @@ const workMessage = async (interaction) => {
           embeds: [
             new EmbedBuilder()
               .setTitle('Увольнение')
-              .setColor(Number(designConfig.success))
+              .setColor(DesignConfig.colors.success)
               .setDescription(
                 `
 Вы уволились с работы
@@ -75,7 +76,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Новая работа!')
-            .setColor(Number(designConfig.success))
+            .setColor(DesignConfig.colors.success)
             .setDescription(
               `
 Поздравляем, вы устроились на работу: **${selected}**
@@ -98,23 +99,10 @@ const workMessage = async (interaction) => {
 
     // Проверка на работу.
     if (userDb.work.currently != 'Фермер') {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на ферме')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(`Вы не устроены на работу фермера`)
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      return CommandCustomError(
+        interaction,
+        `Вы не устроены на работу фермера`
+      );
     }
 
     // Записываем сколько времени осталось до сбора урожая.
@@ -122,29 +110,14 @@ const workMessage = async (interaction) => {
 
     // Если урожай еще не готов.
     if (!isPast(hoursToGet)) {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на ферме')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(
-                `
+      return CommandCustomError(
+        interaction,
+        `
 Урожай еще не созрел. Вернитесь позже. Урожай можно собирать раз в 4 часа. До сбора осталось: \`${getTimeLeft(
-                  hoursToGet
-                )}\`
+          hoursToGet
+        )}\`
                 `
-              )
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      );
     }
 
     // Если это был сбор урожая.
@@ -174,31 +147,16 @@ const workMessage = async (interaction) => {
 
     // Проверка уровня работы.
     if (obj.level > userDb.work.farmer.levels.level) {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на ферме')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(
-                `
+      return CommandCustomError(
+        interaction,
+        `
 Ваш уровень работы не подходит для сбора этого урожая. Требуется **${
-                  obj.level
-                } уровень.**\nУ вас **${userDb.work.farmer.levels.level} (${
-                  userDb.work.farmer.levels.exp
-                } / ${userDb.work.farmer.levels.level * 10}) уровень.**
+          obj.level
+        } уровень.**\nУ вас **${userDb.work.farmer.levels.level} (${
+          userDb.work.farmer.levels.exp
+        } / ${userDb.work.farmer.levels.level * 10}) уровень.**
                 `
-              )
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      );
     }
 
     // Запускаем процесс работы.
@@ -215,7 +173,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Работа на ферме')
-            .setColor(Number(designConfig.success))
+            .setColor(DesignConfig.colors.success)
             .setFooter({
               text: footer,
             })
@@ -241,23 +199,10 @@ const workMessage = async (interaction) => {
 
     // Проверка на работу.
     if (userDb.work.currently != 'Пивовар') {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на пивоварне')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(`Вы не устроены на работу пивовара`)
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      return CommandCustomError(
+        interaction,
+        `Вы не устроены на работу пивовара`
+      );
     }
 
     // Записываем сколько времени осталось до сбора урожая.
@@ -265,29 +210,14 @@ const workMessage = async (interaction) => {
 
     // Если урожай еще не готов.
     if (!isPast(hoursToGet)) {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на пивоварне')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(
-                `
+      return CommandCustomError(
+        interaction,
+        `
 Сусло еще не готово. Вернитесь позже. Варить напитки раз в 4 часа. До сбора осталось: \`${getTimeLeft(
-                  hoursToGet
-                )}\`
+          hoursToGet
+        )}\`
                 `
-              )
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      );
     }
 
     // Если это был сбор урожая.
@@ -317,31 +247,16 @@ const workMessage = async (interaction) => {
 
     // Проверка уровня работы.
     if (obj.level > userDb.work.brewer.levels.level) {
-      return await interaction
-        .reply({
-          ephemeral: true,
-          embeds: [
-            new EmbedBuilder()
-              .setTitle('Работа на пивоварне')
-              .setColor(Number(designConfig.error))
-              .setFooter({
-                text: footer,
-              })
-              .setDescription(
-                `
+      return CommandCustomError(
+        interaction,
+        `
 Ваш уровень работы не подходит для варки этого напитка. Требуется **${
-                  obj.level
-                } уровень.**\nУ вас **${userDb.work.brewer.levels.level} (${
-                  userDb.work.brewer.levels.exp
-                } / ${userDb.work.brewer.levels.level * 10}) уровень.**
+          obj.level
+        } уровень.**\nУ вас **${userDb.work.brewer.levels.level} (${
+          userDb.work.brewer.levels.exp
+        } / ${userDb.work.brewer.levels.level * 10}) уровень.**
                 `
-              )
-              .setImage(
-                'https://media.tenor.com/XISdXhhFDhwAAAAC/line-border.gif'
-              ),
-          ],
-        })
-        .catch((err) => console.log(err));
+      );
     }
 
     // Запускаем процесс работы.
@@ -358,7 +273,7 @@ const workMessage = async (interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle('Работа на пивоварне')
-            .setColor(Number(designConfig.success))
+            .setColor(DesignConfig.colors.success)
             .setFooter({
               text: footer,
             })

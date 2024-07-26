@@ -1,6 +1,7 @@
 # Installation Instructions
 
 To set up the bot, you need to add a `tokens.json` file to the Config folder. This file contains sensitive information that allows your bot to connect to **Discord and MongoDB**. The structure of this file is as follows:
+
 ```
 {
   "PRODUCTION": {
@@ -20,6 +21,7 @@ To set up the bot, you need to add a `tokens.json` file to the Config folder. Th
 Replace the placeholders with the appropriate values for your environment. You will need separate files for production and development environments.
 
 ## Running the Bot
+
 To launch the bot in production mode, use the command:
 
 ```
@@ -32,4 +34,4 @@ For development mode, use the following command:
 npm run dev
 ```
 
-*Remember to update the `tokens.json` file accordingly before running the bot in each environment.*
+_Remember to update the `tokens.json` file accordingly before running the bot in each environment._

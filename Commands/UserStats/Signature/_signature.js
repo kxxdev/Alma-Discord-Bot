@@ -2,11 +2,12 @@ import { EmbedBuilder } from 'discord.js';
 
 import User from '../../../Models/Users/User.js';
 
-const command = async (interaction) => {
-  // Получаем конфигурацию дизайна.
-  const designConfig = interaction.client.designConfig;
+import { GetDesignConfig } from '../../../Config/design-config.js';
+import { CommandCustomError } from '../../CommandsError.js';
+const DesignConfig = GetDesignConfig();
 
-  const { guild, member } = interaction;
+const command = async (interaction) => {
+  const { guild, member, options } = interaction;
   // Загружаем экземпляр пользователя.
   const userDb = await User.get({ id: member.id, guildId: guild.id });
 
@@ -15,10 +16,10 @@ const command = async (interaction) => {
 
   // Проверяем длинну подписи.
   if (signature.length > 130) {
-    return interaction.reply({
-      content: 'Длина подписи не может превышать 130 символов.',
-      ephemeral: true,
-    });
+    return CommandCustomError(
+      interaction,
+      'Длина подписи не может превышать 130 символов.'
+    );
   }
 
   // Устанавливаем подпись.
@@ -26,13 +27,13 @@ const command = async (interaction) => {
 
   // Создаем эмбед.
   const embed = new EmbedBuilder()
-    .setTitle('Подпись установлена!')
+    .setTitle(`Подпись установлена ${DesignConfig.emojis.success}`)
     .setDescription(
       `Теперь ваша подпись будет указываться в вашем профиле. Для смены напишите команду еще раз.`
     )
-    .setColor(Number(designConfig.success))
+    .setColor(DesignConfig.colors.success)
     .setThumbnail(member.displayAvatarURL())
-    .setImage(designConfig.footerURL);
+    .setImage(DesignConfig.footer.greyLineURL);
 
   // Возвращаем ответ.
   await interaction

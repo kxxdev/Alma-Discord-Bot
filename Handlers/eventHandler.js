@@ -1,3 +1,6 @@
+// Подключаем ивенты из библиотеки discord.js
+import { Events } from 'discord.js';
+
 // Загружаем библиотеку таблиц.
 import ascii from 'ascii-table';
 
@@ -28,7 +31,6 @@ const loadEvents = async (client) => {
       const files = fs
         .readdirSync(`./Events/${eventCategoryFolder}/${eventFolder}`)
         .filter((file) => file.endsWith('.js') && file.charAt(0) != '_');
-
       // Проходимся по всем файлам.
       for (const file of files) {
         // Загружаем в переменную файл ивента.
@@ -37,9 +39,17 @@ const loadEvents = async (client) => {
         );
 
         // Запускаем ивент.
-        client.on(event.default.name, (...args) => {
-          event.default.execute(...args, client);
-        });
+        if (event.default.once) {
+          client.once(event.default.name, (...args) => {
+            console.log(`Вызван ивент: ${event.default.name}`);
+            event.default.execute(...args, client);
+          });
+        } else {
+          client.on(event.default.name, (...args) => {
+            console.log(`Вызван ивент: ${event.default.name}`);
+            event.default.execute(...args, client);
+          });
+        }
 
         // Добавляем ивент в таблицу.
         table.addRow(file, 'loaded');
