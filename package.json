@@ -1,6 +1,6 @@
 {
   "name": "alma",
-  "version": "1.4.7",
+  "version": "1.5",
   "description": "The official bot for AXEL - https://discord.gg/k3T6wJ9kD5",
   "main": "index.js",
   "scripts": {
