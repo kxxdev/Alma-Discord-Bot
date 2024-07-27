@@ -1,19 +1,19 @@
 # Installation Instructions
 
-To set up the bot, you need to add a `tokens.json` file to the Config folder. This file contains sensitive information that allows your bot to connect to **Discord and MongoDB**. The structure of this file is as follows:
+To set up the bot, you need to add a `tokens.json` file to the **Config folder**. This file contains sensitive information that allows your bot to connect to **Discord and MongoDB**. The structure of this file is as follows:
 
 ```
 {
   "PRODUCTION": {
     "GUILD_ID": "YOUR_GUILD_ID",
     "DISCORD_TOKEN": "YOUR_BOT_TOKEN",
-    "MONGODB_TOKEN": "YOUR_MONGODB_TOKEN"
+    "MONGODB_TOKEN": "mongodb+srv://CLUSTER_NAME:PASSWORD@cluster0.re9fg.mongodb.net/DATABASE_NAME"
   },
 
   "DEVELOPMENT": {
     "GUILD_ID": "YOUR_TESTGUILD_ID",
-    "DISCORD_TOKEN": "YOUR_TEST_BOT_ID",
-    "MONGODB_TOKEN": "YOUR_TESTMONGODB_TOKEN"
+    "DISCORD_TOKEN": "YOUR_TEST_BOT_TOKEN",
+    "MONGODB_TOKEN": "mongodb+srv://CLUSTER_NAME:PASSWORD@cluster0.re9fg.mongodb.net/DATABASETEST_NAME"
   }
 }
 ```
@@ -35,3 +35,5 @@ npm run dev
 ```
 
 _Remember to update the `tokens.json` file accordingly before running the bot in each environment._
+
+_Attention! The bot operates only for the guild specified in `GUILD_ID` in the `tokens.json` file! It will not work in other guilds!_
