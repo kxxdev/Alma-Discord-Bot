@@ -34,6 +34,6 @@ For development mode, use the following command:
 npm run dev
 ```
 
-_Remember to update the `tokens.json` file accordingly before running the bot in each environment._
+_Remember to update the `tokens.json` file accordingly before running this bot in each environment._
 
-_Attention! The bot operates only for the guild specified in `GUILD_ID` in the `tokens.json` file! It will not work in other guilds! The bot is being developed exclusively for the "AXEL" guild. You can run and use it in your own guilds at your own discretion. The bot is not for sale._
+_Attention! This bot operates only for the guild specified in `GUILD_ID` in the `tokens.json` file! It will not work in other guilds! This bot is being developed exclusively for the "AXEL" guild. You can run and use it in your own guilds at your own discretion. This bot is not for sale._
